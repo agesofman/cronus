@@ -1,0 +1,65 @@
+---
+title: "Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette provides a brief summary of the products made available from the package. You can see the materials covered in the package by calling the function `print_tree()`.
+
+```{r setup}
+library(cronus)
+print_tree()
+```
+
+## Agricultural
+
+### NASS
+
+#### Quick Stats
+
+The Quick Stats Database is the most comprehensive tool for accessing agricultural data published by the USDA National Agricultural Statistics Service (NASS). Quick Stats contains official published aggregate estimates related to U.S. agricultural production, available in county, state, or country level.
+
+The data include the total crops and cropping practices for each county, and breakouts for irrigated and non-irrigated practices for many crops, for selected States. The database allows custom extracts based on commodity, year, and selected counties within a State, or all counties in one or more States. The county data includes totals for the Agricultural Statistics Districts (county groupings) and the State. The download data files contain planted and harvested area, yield per acre and production.
+
+NASS develops these estimates from data collected through sample surveys conducted each year covering virtually every aspect of U.S. agriculture and the Census of Agriculture conducted every five years providing state- and county-level aggregates. For more information, visit the [NASS website](https://www.nass.usda.gov/).
+
+#### Cropland Data Layers
+
+The National Agricultural Statistical Service (NASS) offers the Cropland Data Layers (CDLs), 1km geospatial maps of estimated crop land use. For more information, visit the [NASS website](https://www.nass.usda.gov/).
+
+
+### Bibliography
+
+#### Parameters and Metadata
+
+## Environmental
+
+### Oak-Ridge National Laboratory 
+
+#### Daymet
+
+Daymet provides long-term, continuous, gridded estimates of daily weather and climatology variables by interpolating and extrapolating ground-based observations through statistical modeling techniques.
+
+The Daymet data products provide driver data for biogeochemical terrestrial modeling. Daymet weather variables include
+
+-   minimum temperature,
+-   maximum temperature,
+-   precipitation,
+-   vapor pressure,
+-   shortwave radiation,
+-   snow water equivalent, and
+-   day length
+
+produced on a 1 km x 1 km gridded surface over continental North America and Hawaii from 1980 and over Puerto Rico from 1950 through the end of the most recent full calendar year.
+
+Daymet is a research product of the Environmental Sciences Division at Oak Ridge National Laboratory, Oak Ridge, TN. For more information, visit the [Daymet website](https://daymet.ornl.gov/).

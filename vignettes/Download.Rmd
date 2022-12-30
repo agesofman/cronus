@@ -1,0 +1,104 @@
+---
+title: "Download"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Download}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Safety and Keyrings
+
+Many organizations require credentials in order to allow data download. In order to safely store API keys and passwords, the R package `keyring` is used. You can always store your credentials in another safe place, just make sure they are *not* made publicly available by mistake.
+
+The following example shows how we can create a keyring (an account) and store our credentials.
+
+```{r, eval = FALSE}
+ ringname <- "my_ringname"
+ password <- "my_password"
+
+ create_keyring(ringname, password)
+
+ log_in(ringname, password)
+
+ add_key(ringname = ringname,
+         provider = "nass",
+         username = NULL,
+         password = "nass_key")
+
+ add_key(ringname = ringname,
+         provider = "modis",
+         username = "modis_username",
+         password = "modis_password")
+
+ log_out(ringname)
+```
+
+## Agricultural
+
+### NASS
+
+#### Quick Stats
+
+The S4 class `Quickstats` can be used to handle data of the quickstats product. The function is a wrapper of the `nassqs()` function from the `rnassqs` package. In order to download the data, an API key is required; information can be found in the `rnassqs` package vignette.
+
+```{r, eval = FALSE}
+ x <- new("Quickstats", region = region, date = date, dir = dir)
+ variable <- "progress"
+ data <- download(x, variable, ringname)
+ plot(x, variable, crops = c("Corn", "Oats"), year = 2002)
+```
+
+#### Cropland Data Layers
+
+The S4 class `Cropmaps` can be used to handle data of the cropmaps product. 
+
+```{r, eval = FALSE}
+ x <- new("Cropmaps", region = region, date = date, dir = dir)
+ variable <- "cdl"
+ download(x, variable)
+ plot(x, variable, crops = c("Soybeans", "Winter Wheat"), year = 2002)
+```
+
+### Bibliography
+
+#### Parameters and Metadata
+
+```{r, eval = FALSE}
+ x <- new("Parameters", region = region, date = date, dir = dir)
+ write_metadata(x, name = "default", tb_ct = ct)
+```
+
+## Environmental
+
+### Oak-Ridge National Laboratory 
+
+#### Daymet
+
+The S4 class `Daymet` can be used to handle data of the daymet product. It is a wrapper of the `get_daymet()` function from the `FedData` package. 
+
+```{r, eval = FALSE}
+ x <- new("Daymet", region = region, date = date, dir = dir)
+ download(x, variable = "tmin")
+ plot(x, "tmin", "2002-01-01")
+```
+
+## Satellite Data (Landsat, Sentinel, MODIS)
+
+This function uses the `rsat::rsat_search()` function to search for available products in the requested dates. Then, it recursively calls `rsat::rsat_download()` and `rsat::rsat_mosaic()` to download and mosaic the data, before deleting the original hdf files to save disk space. The satellite data are extracted in GeoTiff format (zipped).
+
+The recursive call of the function has a slight performance impact, but it is crucial in order to download data over large regions and periods of time. For example, assume we want to download the MOD09GA product for the state of Nebraska for one day. The (3) hdf files required combined surpass 250MB of memory space, while the mosaiced, zipped Geotiff images take about 15MB.
+
+```{r, eval = FALSE}
+ x <- new("Mod09ga", region = region, date = date, dir = dir)
+ download(x, keyring)
+```
+
+You are now ready to read `vignette("Process")`.
