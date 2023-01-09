@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 Many organizations require credentials in order to allow data download. In order to safely store API keys and passwords, the R package `keyring` is used. You can always store your credentials in another safe place, just make sure they are *not* made publicly available by mistake.
 
-The following example shows how we can create a keyring (an account) and store our credentials.
+A keyring is an account that can hold keys (credentials) for various services. Once a keyring is created, the user can start adding keys to it. Functions in the `cronus` package that require credentials can automatically get them if provided with the ringname. Users are reminded to log-in and log-out in order to use their keyrings. The following example shows how to create a keyring and store credentials.
 
 ```{r, eval = FALSE}
  ringname <- "my_ringname"
@@ -29,17 +29,32 @@ The following example shows how we can create a keyring (an account) and store o
  log_in(ringname, password)
 
  add_key(ringname = ringname,
-         provider = "nass",
-         username = NULL,
-         password = "nass_key")
+         provider = "usgs",
+         username = "usgs_username",
+         password = "usgs_password")
 
- add_key(ringname = ringname,
-         provider = "modis",
-         username = "modis_username",
-         password = "modis_password")
+ get_username(ringname, "usgs")
+ get_password(ringname, "usgs")
+ delete_key(ringname, "usgs")
 
  log_out(ringname)
+ 
+ log_in(ringname, password)
+ delete_keyring(ringname)
 ```
+
+## Download Function
+
+Package cronus offers a set of generic functions that work with these objects. First of all, we need to download the data, using the function `download()`. The following example shows how to download the NASS Quickstats progress variable, the NASS Cropmaps CDL variable and the ORNL Daymet tmin and tmax variables:
+
+```{r eval = FALSE}
+?download
+download(x, variable = "progress")
+download(y, variable = "cdl")
+download(z, variable = c("tmin", "tmax"))
+```
+
+Note: All functions that may require more than a few seconds are equipped with a progress bar indicating the percentage completed, as well as the estimated time remaining.
 
 ## Agricultural
 
@@ -50,7 +65,7 @@ The following example shows how we can create a keyring (an account) and store o
 The S4 class `Quickstats` can be used to handle data of the quickstats product. The function is a wrapper of the `nassqs()` function from the `rnassqs` package. In order to download the data, an API key is required; information can be found in the `rnassqs` package vignette.
 
 ```{r, eval = FALSE}
- x <- new("Quickstats", region = region, date = date, dir = dir)
+ x <- new("Quickstats", region = region, date = date, dir = )
  variable <- "progress"
  data <- download(x, variable, ringname)
  plot(x, variable, crops = c("Corn", "Oats"), year = 2002)
@@ -61,7 +76,7 @@ The S4 class `Quickstats` can be used to handle data of the quickstats product. 
 The S4 class `Cropmaps` can be used to handle data of the cropmaps product. 
 
 ```{r, eval = FALSE}
- x <- new("Cropmaps", region = region, date = date, dir = dir)
+ x <- new("Cropmaps", region = region, date = date)
  variable <- "cdl"
  download(x, variable)
  plot(x, variable, crops = c("Soybeans", "Winter Wheat"), year = 2002)
@@ -72,7 +87,7 @@ The S4 class `Cropmaps` can be used to handle data of the cropmaps product.
 #### Parameters and Metadata
 
 ```{r, eval = FALSE}
- x <- new("Parameters", region = region, date = date, dir = dir)
+ x <- new("Parameters", region = region, date = date)
  write_metadata(x, name = "default", tb_ct = ct)
 ```
 

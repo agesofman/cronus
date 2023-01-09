@@ -7,7 +7,8 @@
 #'
 #' @description `r lifecycle::badge("stable")`
 #'
-#' This set of functions handles keys that are needed to download products such as satellite data.
+#' This set of functions handles keys that are needed to download products such
+#' as satellite data.
 #'
 #' @param ringname character. The name of a keyring (a ringname).
 #' @param username character. A username signed-up in a service provider.
@@ -18,7 +19,12 @@
 #' @export
 #' @importFrom keyring keyring_create keyring_unlock keyring_lock key_set_with_value key_list key_get key_delete keyring_is_locked
 #'
-#' @details This set of function are wrappers of the keyring package. A keyring is an account that can hold keys (credentials) for various services. Once a keyring is created, the user can start adding keys to it. Functions in the \code{cronus} package that require credentials can automatically get them if provided with the \code{ringname}. Users are reminded to log-in and log-out in order to use their keyrings.
+#' @details This set of function are wrappers of the keyring package. A keyring
+#' is an account that can hold keys (credentials) for various services. Once a
+#' keyring is created, the user can start adding keys to it. Functions in the
+#' `cronus` package that require credentials can automatically get them if
+#' provided with the ringname. Users are reminded to log-in and log-out
+#' in order to use their keyrings.
 #'
 #' @examples
 #' \dontrun{
@@ -37,19 +43,26 @@
 #' password = "nass_key")
 #'
 #' add_key(ringname = ringname,
-#' provider = "modis",
-#' username = "modis_username",
-#' password = "modis_password")
+#'         provider = "usgs",
+#'         username = "usgs_username",
+#'         password = "usgs_password")
 #'
-#' get_username(ringname, "modis")
-#' get_key(ringname, "modis")
-#' delete_key(ringname, "modis")
+#' get_username(ringname, "usgs")
+#' get_password(ringname, "usgs")
+#' delete_key(ringname, "usgs")
 #'
 #' log_out(ringname)
+#' delete_keyring(ringname)
 #' }
 #' @describeIn create_keyring Create a keyring.
 create_keyring <- function(ringname, password) {
   keyring::keyring_create(ringname, password)
+}
+
+#' @describeIn create_keyring Delete a keyring.
+#' @export
+delete_keyring <- function(ringname) {
+  keyring::keyring_delete(ringname)
 }
 
 #' @describeIn create_keyring Log into your keyring.
@@ -92,7 +105,7 @@ delete_key <- function(ringname, provider) {
 #' @export
 check_keyring <- function(ringname) {
   if (is.null(ringname)) {
-    stop("Keyring not provided. See ?create_account for more information.")
+    stop("Keyring not provided. See ?create_keyring for more information.")
   } else if (keyring::keyring_is_locked(ringname)) {
     stop("Keyring is locked. See ?log_in for more information.")
   }

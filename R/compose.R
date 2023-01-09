@@ -6,20 +6,18 @@
 #' @title Compose rasters by maps
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Compose Rasters into zonal summaries, indicated by another raster.
 #'
 #' @param x S4 object. The product of interest.
 #' @param y S4 object. The product determining the zones.
-#' @param variablex character. The variable of product \code{x}.
-#' @param variabley character. The variable of product \code{y}.
+#' @param variablex character. The variable of product `x`.
+#' @param variabley character. The variable of product `y`.
 #' @param fun character or function. The function to apply for the summaries.
-#' @param ... extra arguments passed to \code{fun}.
+#' @param ... extra arguments passed to `fun`.
 #'
 #' @return A data.frame with the zonal summaries. The data.frame is also saved in the cronus database in .csv format.
 #'
-#' @details
-#' Currently, \code{y} can only be a NASS Cropmap.
+#' @details Currently, `y` can only be a NASS Cropmap.
 #'
 #' @export
 #' @importFrom terra rast project zonal

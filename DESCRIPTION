@@ -1,6 +1,6 @@
 Package: cronus
 Title: Agricultural Remote Sensing Database Constructor
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: c(
     person(given = "Ioannis", family = "Oikonomidis",
            email = "goikon@math.uoa.gr", role = c("aut", "cre"),
@@ -55,5 +55,5 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.2
-URL: https://github.com/thechibo/cronus
-BugReports: https://github.com/thechibo/cronus/issues
+URL: https://github.com/agesofman/cronus
+BugReports: https://github.com/agesofman/cronus/issues

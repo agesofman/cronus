@@ -16,11 +16,11 @@ knitr::opts_chunk$set(
 
 ## Welcome to cronus!
 
-The *prometheus* project applies advanced statistical methodology on remote sensing agriculture. It is composed of several R packages, as well as other elements, each one focusing on a different application.
+The *Ages of Man* project applies advanced statistical methodology on remote sensing agriculture. It is composed of several R packages, as well as other elements, each one focusing on a different application.
 
 *cronus* is an R package that focuses on database creation. It can be used to download and process agricultural, environmental and satellite data from various sources. This vignette concerns the cronus database creation.
 
-## Database Structure
+## Database structure
 
 The database takes the form of a 5-level structured directory. For a specific region, data can belong to one of three sectors: agricultural, environmental or satellite. Data are made available by a provider, usually an organization or a lab, which organizes the data in one or more products. Each product contains several variables of interest. You can see the materials covered in the package by calling the function `print_tree()`.
 
@@ -37,9 +37,11 @@ library(cronus)
 print_tree()
 ```
 
-For more information on the nature of these data products, read `vignette("Data")`.
+For more information on the nature of the available data products, read `vignette("Data")`.
 
-The available products are in fact expressed as instances of S4 classes. This allows to create generic functions with different methods for each product, making it especially easy for new users to get familiar with the package. All class objects require three slots
+## Preparation
+
+Most of the package functions require an object that holds information concerning the data, region and time interval of interest. These objects are expressed as instances of S4 classes, allowing to create generic functions with different methods for each product, thus making it especially easy for new users to get familiar with the package. All class objects require three slots:
 
 1. `region`, an object of class `Region` indicating the region of interest,
 2. `date`, an object of class `Date` indicating the time of interest and
@@ -55,19 +57,17 @@ Now, it is straightforward to create an object of interest:
 
 ```{r}
 x <- new("Quickstats", region = region, date = date, dir = dir)
-y <- new("Cropmaps",   region = region, date = date, dir = dir)
-z <- new("Daymet",     region = region, date = date, dir = dir)
+y <- new("Cropmaps", region = region, date = date, dir = dir)
+z <- new("Daymet", region = region, date = date, dir = dir)
 ```
 
-Package cronus offers a set of generic functions that work with these objects. First of all, we need to download the data, using the function `download()`. The following example shows how to download the NASS Quickstats progress variable, the NASS Cropmaps CDL variable and the ORNL Daymet tmin and tmax variables:
+## Database path
 
-```{r eval = FALSE}
-?download
-download(x, variable = "progress")
-download(y, variable = "cdl")
-download(z, variable = c("tmin", "tmax"))
+In order to avoid specifying the database directory in every single function call, a variable named `path_demeter` can be added to the `options()`, stored in the user or project .RProfile file. This allows the user to specify only once the database directory, which will be loaded in the beginning of every R session. Function `set_path_demeter()` can be called to specify or change the path.
+
+```{r}
+path <- getwd()
+set_path_demeter(path, prof = "user")
 ```
-
-Note: All functions that may require more than a few seconds are equipped with a progress bar indicating the percentage completed, as well as the estimated time remaining.
 
 You are now ready to read `vignette("Download")`.

@@ -2,6 +2,7 @@
 % Please edit documentation in R/keyring.R
 \name{create_keyring}
 \alias{create_keyring}
+\alias{delete_keyring}
 \alias{log_in}
 \alias{log_out}
 \alias{add_key}
@@ -12,6 +13,8 @@
 \title{Manage keys and keyrings}
 \usage{
 create_keyring(ringname, password)
+
+delete_keyring(ringname)
 
 log_in(ringname, password)
 
@@ -42,14 +45,22 @@ nothing.
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-This set of functions handles keys that are needed to download products such as satellite data.
+This set of functions handles keys that are needed to download products such
+as satellite data.
 }
 \details{
-This set of function are wrappers of the keyring package. A keyring is an account that can hold keys (credentials) for various services. Once a keyring is created, the user can start adding keys to it. Functions in the \code{cronus} package that require credentials can automatically get them if provided with the \code{ringname}. Users are reminded to log-in and log-out in order to use their keyrings.
+This set of function are wrappers of the keyring package. A keyring
+is an account that can hold keys (credentials) for various services. Once a
+keyring is created, the user can start adding keys to it. Functions in the
+\code{cronus} package that require credentials can automatically get them if
+provided with the ringname. Users are reminded to log-in and log-out
+in order to use their keyrings.
 }
 \section{Functions}{
 \itemize{
 \item \code{create_keyring()}: Create a keyring.
+
+\item \code{delete_keyring()}: Delete a keyring.
 
 \item \code{log_in()}: Log into your keyring.
 
@@ -83,14 +94,15 @@ username = NULL,
 password = "nass_key")
 
 add_key(ringname = ringname,
-provider = "modis",
-username = "modis_username",
-password = "modis_password")
+        provider = "usgs",
+        username = "usgs_username",
+        password = "usgs_password")
 
-get_username(ringname, "modis")
-get_key(ringname, "modis")
-delete_key(ringname, "modis")
+get_username(ringname, "usgs")
+get_password(ringname, "usgs")
+delete_key(ringname, "usgs")
 
 log_out(ringname)
+delete_keyring(ringname)
 }
 }

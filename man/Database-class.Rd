@@ -117,7 +117,7 @@ Classes \code{Database}, \code{Sector}, \code{Provider}, and \code{Product} are 
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2021-12-31")
-dir <- getwd()
+dir <- get_path_demeter()
 
 x <- new("Quickstats", region = region, date = date, dir = dir)
 y <- Cropmaps(region = region, date = date, dir = dir)

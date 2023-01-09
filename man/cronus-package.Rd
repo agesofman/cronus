@@ -4,7 +4,7 @@
 \name{cronus-package}
 \alias{cronus}
 \alias{cronus-package}
-\title{cronus: Agricultural Remote Sensing Data Download}
+\title{cronus: Agricultural Remote Sensing Database Constructor}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
@@ -13,8 +13,8 @@ cronus is an R package that focuses on database creation. It can be used to down
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/thechibo/cronus}
-  \item Report bugs at \url{https://github.com/thechibo/cronus/issues}
+  \item \url{https://github.com/agesofman/cronus}
+  \item Report bugs at \url{https://github.com/agesofman/cronus/issues}
 }
 
 }

@@ -77,7 +77,7 @@ Region <- setClass("Region",
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2021-12-31")
-#' dir <- getwd()
+#' dir <- get_path_demeter()
 #'
 #' x <- new("Quickstats", region = region, date = date, dir = dir)
 #' y <- Cropmaps(region = region, date = date, dir = dir)
@@ -87,7 +87,7 @@ Database <- setClass("Database",
                                   date = "Date",
                                   dir = "character"),
                      prototype = list(date = as.Date(""),
-                                      dir = getwd()))
+                                      dir = get_path_demeter()))
 
 #' @rdname Database-class
 Sector <- setClass("Sector", contains = "Database")
