@@ -6,7 +6,6 @@
 #' @title Summarize raster data
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Summarize raster data into a data frame.
 #'
 #' @param x S4 object. A product of interest.
@@ -21,13 +20,18 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Define required variables
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
-#' dir <- getwd()
 #'
-#' x <- new("Cropmaps", region = region, date = date, dir = dir)
-#' mydf <- summarize(x, "cdl_default")
+#' ## Cropmaps CDL
+#'
+#' # Create the object
+#' x <- new("Cropmaps", region = region, date = date)
+#'
+#' # Summarize
+#' a <- summarize(x, "cdl_recoded")
 #' }
 setGeneric("summarize", signature = c("x"),
            function(x, ...) { standardGeneric("summarize") })
@@ -36,6 +40,9 @@ setGeneric("summarize", signature = c("x"),
 setMethod("summarize",
           signature  = c(x = "Cropmaps"),
           definition = function(x, variable) {
+
+  # Bind global variables
+  layer <- count <- NULL
 
   # Get slots
   region <- x@region
@@ -54,7 +61,7 @@ setMethod("summarize",
 
   # Compute the frequencies
   x <- terra::freq(ras_var, digits = 0, bylayer = TRUE)
-  x <- tidyr::pivot_wider(x, names_from = .data$layer, values_from = .data$count)
+  x <- tidyr::pivot_wider(x, names_from = layer, values_from = count)
   colnames(x) <- c("value", year)
   x[ , -1][is.na(x[ , -1])] <- 0
 

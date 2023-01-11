@@ -21,17 +21,25 @@ nothing. The data are saved directly in the cronus database.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
-Find dates for which the raster is missing and fill the gap with an empty raster.
+Find dates for which the raster is missing and fill the gap with an empty
+raster.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2002-12-31")
-dir <- getwd()
 
-x <- new("Mod09ga", region = region, date = date, dir = dir)
+## MOD09GA
+
+# Create objects
+x <- new("Mod09ga", region = region, date = date)
+
+# Create the NDVI rasters that are missing
 fillgaps(x, "ndvi")
+
+# Create the cloud mask rasters that are missing
+fillgaps(x, "cloudmask")
 }
 }

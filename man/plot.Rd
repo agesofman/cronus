@@ -27,7 +27,7 @@ plot(x, y, ...)
 
 \S4method{plot}{Cropmaps,character}(x, y, crops = NULL, year = NULL)
 
-\S4method{plot}{Daymet,character}(x, y, date)
+\S4method{plot}{Daymet,character}(x, y, date = NULL)
 }
 \arguments{
 \item{x}{an S4 object. A product of interest.}
@@ -65,25 +65,30 @@ A plot, created either with \code{ggplot2} or with \code{terra}.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
 Create a plot of the data stored in the database.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2002-12-31")
-dir <- getwd()
 
-# Plot the Cropland Data Layer
-x <- new("Cropmaps", region = region, date = date, dir = dir)
+## Quickstats Progress
+
+# Create the object
+x <- new("Cropmaps", region = region, date = date)
+
+# Plot
 variable <- "cdl"
-download(x, variable)
 plot(x, variable, crops = c("Soybeans", "Winter Wheat"), year = 2002)
 
-# Plot the Daymet minimum temperature
+## Daymet Tmin
+
+# Create the object
 x <- new("Daymet", region = region, date = date, dir = dir)
-download(x, variable = "tmin")
+
+# Plot
 plot(x, "tmin", "2002-01-01")
 }
 }

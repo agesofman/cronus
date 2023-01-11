@@ -23,7 +23,8 @@ compose(x, y, ...)
 \item{fun}{character or function. The function to apply for the summaries.}
 }
 \value{
-A data.frame with the zonal summaries. The data.frame is also saved in the cronus database in .csv format.
+A data.frame with the zonal summaries. The data.frame is also saved
+in the cronus database in .csv format.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
@@ -34,14 +35,27 @@ Currently, \code{y} can only be a NASS Cropmap.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2002-12-31")
-dir <- getwd()
 
-# Compute the Growing Degree Days using Daymet and CDL.
-x <- new("Daymet", region = region, date = date, dir = dir)
-y <- new("Cropmaps", region = region, date = date, dir = dir)
-a <- compose(x, y, variablex = "gdd", variabley = "cdl_default", fun = "mean")
+## Daymet
+
+# Create objects
+x <- new("Daymet", region = region, date = date)
+y <- new("Cropmaps", region = region, date = date)
+
+# Compose
+a <- compose(x, y, variablex = "gdd",  variabley = "cdl_default", fun = "mean")
+b <- compose(x, y, variablex = "prcp", variabley = "cdl_default", fun = "mean")
+
+## MOD09GA
+
+# Create objects
+x <- new("Mod09ga", region = region, date = date)
+y <- new("Cropmaps", region = region, date = date)
+
+a <- compose(x, y, variablex = "ndvi_smooth_wt1", variabley = "cdl_recoded", fun = "mean")
 }
 }

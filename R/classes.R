@@ -6,16 +6,15 @@
 #' @title Region class
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' An S4 class that defines a region of interest.
 #'
 #' @slot name character. The name of the region.
-#' @slot type character. The type of the region
-#' @slot id ANY. An appropriate ID for the region
-#' @slot div character. A named character vector specifying the divisions, starting
-#' from the country level and stopping at the region's level.
+#' @slot type character. The type of the region.
+#' @slot id ANY. An appropriate ID for the region.
+#' @slot div character. A named character vector specifying the divisions,
+#' starting from the country level and stopping at the region's level.
 #'
-#' @return an object of class Region
+#' @return an object of class `Region`.
 #' @export
 #'
 #' @examples
@@ -37,7 +36,12 @@ Region <- setClass("Region",
 #' Cronus database classes
 #'
 #' @description `r lifecycle::badge("stable")`
-#' cronus creates a database, which takes the form of a 5-level directory. These levels are Region > Sector > Provider > Product > Variable. For a specific region, data can belong to one of three sectors: agricultural, environmental or satellite. Data are made available by a provider, usually an organization or a lab, which organizes the data in one or more products. Each product contains several variables of interest.
+#' cronus creates a database, which takes the form of a 5-level directory. These
+#' levels are Region > Sector > Provider > Product > Variable. For a specific
+#' region, data can belong to one of three sectors: agricultural, environmental
+#' or satellite. Data are made available by a provider, usually an organization
+#' or a lab, which organizes the data in one or more products. Each product
+#' contains several variables of interest.
 #'
 #' The class tree structure is the following:
 #'
@@ -62,32 +66,39 @@ Region <- setClass("Region",
 #'      - \code{S2msi2a} Product
 #'      - \code{Sy_2_syn___} Product
 #'
-#' Classes \code{Database}, \code{Sector}, \code{Provider}, and \code{Product} are also defined, but are abstract classes that exist solely for hierarchical purposes.
-#'
+#' Classes \code{Database}, \code{Sector}, \code{Provider}, and \code{Product}
+#' are also defined, but are abstract classes that exist solely for hierarchical
+#' purposes.
 #'
 #' @slot region Region. A region of interest.
 #' @slot date Date. Dates of interest (vector).
-#' @slot dir character. The database parent directory.
+#' @slot dir character. The database parent directory. If the path_demeter
+#' environment variable has been set, it can be omitted.
 #'
 #' @return An S4 object of the appropriate class (constructor functions).
 #' @export
+#'
+#' @seealso [cronus::set_path_demeter()]
 #'
 #' @examples
 #' \dontrun{
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
-#' date <- date_seq("2002-01-01", "2021-12-31")
-#' dir <- get_path_demeter()
+#' date <- as.Date("2020-07-15")
+#' dir <- getwd()
 #'
-#' x <- new("Quickstats", region = region, date = date, dir = dir)
-#' y <- Cropmaps(region = region, date = date, dir = dir)
+#' w <- new("Quickstats", region = region, date = date, dir = dir)
+#' x <- new("Cropmaps", region = region, date = date, dir = dir)
+#' y <- new("Daymet", region = region, date = date, dir = dir)
+#' z <- new("Mod09ga", region = region, date = date, dir = dir)
+#'
 #' }
 Database <- setClass("Database",
                      slots = list(region = "Region",
                                   date = "Date",
                                   dir = "character"),
                      prototype = list(date = as.Date(""),
-                                      dir = get_path_demeter()))
+                                      dir = Sys.getenv("path_demeter")))
 
 #' @rdname Database-class
 Sector <- setClass("Sector", contains = "Database")

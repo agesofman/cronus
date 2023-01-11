@@ -6,7 +6,6 @@
 #' @title Handle Quickstats progress data
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Tidy the Quickstats progress data.
 #'
 #' @param data data.frame or list. The quickstats progress variable.
@@ -16,7 +15,6 @@
 #' @import dplyr
 #' @import tidyr
 #' @importFrom rlang .data
-#' @export
 #'
 #' @return data.frame or list.
 #'

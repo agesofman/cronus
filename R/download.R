@@ -6,15 +6,17 @@
 #' @title Download data
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
-#' Download agricultural, environmental, or satellite data for a region and time of interest.
+#' Download agricultural, environmental, or satellite data for a region and time
+#' of interest.
 #'
 #' @param x S4 object. The product of interest.
 #' @param variable character. The variable of interest.
 #' @param ringname character. A keyring to handle the provider credentials.
 #' @param ... extra arguments.
 #'
-#' @return For most products, nothing is returned. The data are saved directly in the cronus database. For lightweight data (such as variables of the quickstats product), the downloaded data are returned (as a data.frame).
+#' @return For most products, nothing is returned. The data are saved directly
+#' in the cronus database. For lightweight data (such as variables of the
+#' Quickstats product), the downloaded data are returned.
 #'
 #' @details
 #' Currently, the function can download:
@@ -25,45 +27,73 @@
 #'  - The Landsat TM, ETM and 8 products.
 #'  - The Sentinel-2 MSI and Sentinel-3 Synergy products.
 #'
+#' Details concerning the Quickstats product:
+#' The function is a wrapper of the `nassqs()` function from the `rnassqs`
+#' package. In order to download the data, an API key is required; information
+#' can be found in the `rnassqs` package vignette.
+#'
+#' Details concerning the Daymet product:
+#' The S4 class `Daymet` can be used to handle data of the daymet product. It is
+#' a wrapper of the `get_daymet()` function from the `FedData` package.
+#'
+#' Details concerning the satellite sector:
+#' This function uses the `rsat::rsat_search()` function to search for available
+#' products in the requested dates. Then, it recursively calls
+#' `rsat::rsat_download()` and `rsat::rsat_mosaic()` to download and mosaic the
+#' data, before deleting the original hdf files to save disk space. The
+#' satellite data are extracted in GeoTiff format (zipped).
+#' The recursive call of the function has a slight performance impact, but it is
+#' crucial in order to download data over large regions and periods of time.
+#' For example, assume we want to download the MOD09GA product for the state of
+#' Nebraska for one day. The (3) hdf files required combined surpass 250MB of
+#' memory space, while the mosaiced, zipped Geotiff images take about 15MB.
+#'
 #' @export
 #' @importFrom rnassqs nassqs_auth nassqs
 #' @importFrom cdlTools getCDL
-#' @importFrom terra writeRaster
+#' @importFrom terra writeRaster setGDALconfig
 #' @importFrom FedData get_daymet
 #' @importFrom rsat new_rtoi rsat_search rsat_download rsat_mosaic set_credentials
-#' @importFrom rgdal setCPLConfigOption
 #'
 #' @examples
 #' \dontrun{
+#' # Define required variables
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
-#' dir <- getwd()
 #'
-#' # Create a keyring
-#' ringname <- "my_ringname"
-#' password <- "my_password"
-#' create_keyring(ringname, password)
-#' log_in(ringname, password)
+#' ## Quickstats Progress
 #'
-#' # Add an API to download the quickstats data.
-#' add_key(ringname = ringname,
-#'         provider = "nass",
-#'         username = NULL,
-#'         password = "nass_key")
+#' # Create the object
+#' x <- new("Quickstats", region = region, date = date)
 #'
-#' # Download the progress variable from the Quickstats product.
-#' x <- new("Quickstats", region = region, date = date, dir = dir)
-#' variable <- "progress"
-#' data <- download(x, variable, ringname)
+#' # Download the data
+#' data <- download(x, "progress", ringname)
+#' head(data$Corn)
 #'
-#' # Download the Cropland Data Layer (CDL) variable from the Cropmaps product.
-#' x <- new("Cropmaps", region = region, date = date, dir = dir)
-#' variable <- "cdl"
-#' download(x, variable)
+#' ## Cropmaps CDL
 #'
-#' log_out(ringname)
+#' # Create the object
+#' x <- new("Cropmaps", region = region, date = date)
 #'
+#' # Download the data
+#' download(x, "cdl")
+#'
+#' ## Daymet
+#'
+#' # Create the object
+#' x <- new("Daymet", region = region, date = date)
+#'
+#' # Download the data
+#' download(x, c("tmin", "tmax"))
+#'
+#' ## MOD09GA
+#'
+#' # Create the object
+#' x <- new("Mod09ga", region = region, date = date)
+#'
+#' # Download the data
+#' download(x, ringname)
 #' }
 setGeneric("download", signature = c("x"),
            function(x, ...) { standardGeneric("download") })
@@ -139,8 +169,9 @@ setMethod("download",
   message("Downloading the Cropland Data Layers")
   for (year in toi$uyear) {
     cat(" Year", year, "\n")
-    cdlTools::getCDL(region, year, location = dir_temp)
-    ls_cdl <- list.files(dir_temp, pattern = paste0(year, ".*\\.tif$"), full.names = TRUE)
+    cdlTools::getCDL(region@name, year, location = dir_temp)
+    ls_cdl <- list.files(dir_temp, pattern = paste0(year, ".*\\.tif$"),
+                         full.names = TRUE)
     cdl <- terra::rast(ls_cdl)
     filename <- file.path(path, paste0(year, ".tif"))
     terra::writeRaster(cdl, filename = filename, overwrite = TRUE)
@@ -187,7 +218,7 @@ setMethod("download",
       # Download the data
       suppressMessages(
         data <- FedData::get_daymet(template = roi,
-                                    label = region,
+                                    label = region@name,
                                     elements = variable[i],
                                     years = j,
                                     force.redo = TRUE)[[1]]
@@ -195,7 +226,7 @@ setMethod("download",
 
       # Save the rasters
       filename <- file.path(path[i], toi$name[k])
-      rgdal::setCPLConfigOption("GDAL_PAM_ENABLED", "FALSE")
+      terra::setGDALconfig("GDAL_PAM_ENABLED", "FALSE")
       raster::writeRaster(data[[k]],
                           filename = filename,
                           format = "GTiff",
@@ -206,14 +237,12 @@ setMethod("download",
 
 })
 
-#' @title
-#' Create an rtoi object
+#' @title Create an rtoi object
 #'
-#' @description
-#' This function creates an rtoi object for a specific region, according to
-#' the rsat package.
+#' @description This function creates an rtoi object for a specific region,
+#' according to the rsat package.
 #'
-#' @param region character. The region of interest.
+#' @param region an object of class Region. The region of interest.
 #'
 #' @return A data.frame with the requested data.
 #'
@@ -271,7 +300,8 @@ setMethod("download",
   check_keyring(ringname)
   provider <- get_branch(product = product)$provider
   for (service in get_service(provider)) {
-    rsat::set_credentials(get_username(ringname, service), get_password(ringname, service), service)
+    rsat::set_credentials(get_username(ringname, service),
+                          get_password(ringname, service), service)
   }
 
   # Add available files to rtoi
@@ -291,7 +321,8 @@ setMethod("download",
     rsat::rsat_download(rtoi)
     rsat::rsat_mosaic(rtoi)
     #unlink(records_paths[index])
-    path_zip <- list.files(path_rtoi, pattern = "*.zip$", recursive = TRUE, full.names = TRUE)
+    path_zip <- list.files(path_rtoi, pattern = "*.zip$", recursive = TRUE,
+                           full.names = TRUE)
     file.copy(from = path_zip, to = path_cronus, recursive = TRUE)
     unlink(path_zip)
   #}

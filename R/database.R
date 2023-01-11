@@ -6,7 +6,6 @@
 #' Provider service
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Get the service that keeps the satellite data stored in order to access the data.
 #'
 #' @param provider character. A provider of interest
@@ -33,7 +32,6 @@ get_service <- function(provider) {
 #' Manage database
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Helper functions concerning the database structure.
 #'
 #' @param name character. A class name of interest.
@@ -136,11 +134,16 @@ get_product <- function(x) {
 #' @param variable character. The variable of interest.
 #'
 #' @return
-#' - `get_branch()` returns a list containing the `path` (absolute or relative, depending on whether the parent directory was provided or not), as well as all the arguments provided and those that could be extrapolated from them.
-#' - `create_db()` creates the directory specified, `get_branch()$path`, and returns the path invisibly.
-#' - `print_tree()` prints the database structure in a Sector - Provider - Product tree form.
-#' @export
+#' - `get_branch()` returns a list containing the `path` (absolute or relative,
+#' depending on whether the parent directory was provided or not), as well as
+#' all the arguments provided and those that could be extrapolated from them.
+#' - `create_db()` creates the directory specified, `get_branch()$path`, and
+#' returns the path invisibly.
+#' - `print_tree()` prints the database structure in a Sector - Provider - Product
+#' tree form.
+#'
 #' @importFrom dplyr filter
+#' @export
 #'
 #' @examples
 #' \dontrun{

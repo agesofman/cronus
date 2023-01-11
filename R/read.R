@@ -6,7 +6,6 @@
 #' @title Read data
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Read data stored in the cronus database.
 #'
 #' @param x S4 object. A product of interest.
@@ -17,21 +16,31 @@
 #'
 #' @return The data of interest (list, data.frame, raster, or other).
 #'
-#' @export
 #' @importFrom dplyr left_join
+#' @export
 #'
 #' @examples
 #' \dontrun{
+#' # Define required variables
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
-#' dir <- getwd()
 #'
-#' x <- new("Quickstats", region = region, date = date, dir = dir)
+#' ## Quickstats Progress
+#'
+#' # Create the object
+#' x <- new("Quickstats", region = region, date = date)
+#'
+#' # Read the data
 #' variable <- "progress"
 #' list_progress <- read(x, variable)
 #'
-#' x <- new("Parameters", region = region, date = date, dir = dir)
+#' ## Parameters
+#'
+#' # Create the object
+#' x <- new("Parameters", region = region, date = date)
+#'
+#' # Read the data
 #' read(x, name = "default")
 #' }
 setGeneric("read", signature = c("x"),

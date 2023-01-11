@@ -21,17 +21,21 @@ data.frame. A data frame with the summarized data.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
 Summarize raster data into a data frame.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2002-12-31")
-dir <- getwd()
 
-x <- new("Cropmaps", region = region, date = date, dir = dir)
-mydf <- summarize(x, "cdl_default")
+## Cropmaps CDL
+
+# Create the object
+x <- new("Cropmaps", region = region, date = date)
+
+# Summarize
+a <- summarize(x, "cdl_recoded")
 }
 }

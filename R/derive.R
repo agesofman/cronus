@@ -6,7 +6,6 @@
 #' @title Derive data
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Derive variables based on existing data.
 #'
 #' @param x S4 object. A product of interest.
@@ -25,13 +24,30 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Define required variables
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
-#' dir <- getwd()
 #'
-#' # Derive MODIS Terra NDVI and cloudmask variables
-#' x <- new("Mod09ga", region = region, date = date, dir = dir)
+#' ## Daymet
+#'
+#' # Create objects
+#' x <- new("Daymet", region = region, date = date)
+#' y <- new("Cropmaps", region = region, date = date)
+#'
+#' # Create parameters (cardinal temperatures)
+#' z <- new("Parameters", region = region, date = date)
+#' tb_ct <- read(z, "default")$tb_ct
+#'
+#' # Derive gdd (take a look at the gdd function)
+#' derive(x, y, "gdd", varxy = c("tmin", "tmax", "cdl_default"), tb_ct = tb_ct)
+#'
+#' ## MOD09GA
+#'
+#' # Create objects
+#' x <- new("Mod09ga", region = region, date = date)
+#'
+#' # Derive ndvi and cloudmask
 #' derive(x, "ndvi")
 #' derive(x, "cloudmask")
 #' }

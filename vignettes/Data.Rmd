@@ -14,12 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette provides a brief summary of the products made available from the package. You can see the materials covered in the package by calling the function `print_tree()`.
-
-```{r setup}
-library(cronus)
-print_tree()
-```
+This vignette provides a brief summary of the products made available from the package. It focuses on the nature of the data, encapsulating useful information such as links to the product providers and does not contain details on the package code.
 
 ## Agricultural
 

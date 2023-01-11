@@ -26,17 +26,17 @@ output: github_document
 
 The *Ages of Man* project applies advanced statistical methodology on remote sensing agriculture. It is composed of several R packages, as well as other elements, each one focusing on a different application.
 
-*cronus* is an R package that focuses on database creation. It can be used to download and process agricultural, environmental and satellite data from various sources. 
+cronus is an R package that focuses on database creation. It can be used to download and process agricultural, environmental and satellite data from various sources. 
 
 ## Installation
 
-You can install the stable version of *cronus* from CRAN by running the following line of code:
+You can install the stable version of cronus from CRAN by running the following line of code:
 
 ```{r}
  install.packages("cronus")
 ```
 
-You can install the development version of *cronus* from github by running the following line of code:
+You can install the development version of cronus from github by running the following line of code:
 
 ```{r}
  devtools::install_github("agesofman/cronus")

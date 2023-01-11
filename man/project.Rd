@@ -7,7 +7,7 @@
 \usage{
 project(x, y, ...)
 
-\S4method{project}{Cropmaps,Daymet}(x, y, variablex, variabley, varname = variablex)
+\S4method{project}{Cropmaps,Daymet}(x, y, variablex, variabley, newvarname = variablex)
 }
 \arguments{
 \item{x}{S4 object. A product of interest.}
@@ -20,26 +20,29 @@ project(x, y, ...)
 
 \item{variabley}{character. The variable of product \code{y}.}
 
-\item{varname}{character. The name of the projected variable.}
+\item{newvarname}{character. The name of the projected variable.}
 }
 \value{
 nothing. The data are saved directly in the cronus database.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
 Project a raster variable to match another raster variable.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2002-12-31")
-dir <- getwd()
 
-# Project the CDL to match the Daymet tmin variable
-x <- new("Cropmaps", region = region, date = date, dir = dir)
-y <- new("Daymet", region = region, date = date, dir = dir)
-project(x, y, "cdl", "tmin", "cdl_default")
+## Cropmaps CDL and Daymet
+
+# Create objects
+x <- new("Cropmaps", region = region, date = date)
+y <- new("Daymet", region = region, date = date)
+
+# Project
+project(x, y, variablex = "cdl", variabley = "tmin", "cdl_projected")
 }
 }

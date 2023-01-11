@@ -33,12 +33,15 @@ Get the file paths needed to derive a variable.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2002-12-31")
-dir <- getwd()
 
-x <- new("Mod09ga", region = region, date = date, dir = dir)
+# Create the object
+x <- new("Mod09ga", region = region, date = date)
+
+# Get the files
 get_files(x, "ndvi")
 }
 }

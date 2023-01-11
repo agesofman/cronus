@@ -6,7 +6,6 @@
 #' @title Manage time of interest (`toi`)
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Create a list that contains all the necessary formats of the time of interest.
 #'
 #' @param date character. A vector of dates.

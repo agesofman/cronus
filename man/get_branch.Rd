@@ -41,9 +41,13 @@ print_tree()
 }
 \value{
 \itemize{
-\item \code{get_branch()} returns a list containing the \code{path} (absolute or relative, depending on whether the parent directory was provided or not), as well as all the arguments provided and those that could be extrapolated from them.
-\item \code{create_db()} creates the directory specified, \code{get_branch()$path}, and returns the path invisibly.
-\item \code{print_tree()} prints the database structure in a Sector - Provider - Product tree form.
+\item \code{get_branch()} returns a list containing the \code{path} (absolute or relative,
+depending on whether the parent directory was provided or not), as well as
+all the arguments provided and those that could be extrapolated from them.
+\item \code{create_db()} creates the directory specified, \code{get_branch()$path}, and
+returns the path invisibly.
+\item \code{print_tree()} prints the database structure in a Sector - Provider - Product
+tree form.
 }
 }
 \description{

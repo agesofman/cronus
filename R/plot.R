@@ -6,7 +6,6 @@
 #' @title Plot
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Create a plot of the data stored in the database.
 #'
 #' @param x an S4 object. A product of interest.
@@ -36,20 +35,26 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Define required variables
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
-#' dir <- getwd()
 #'
-#' # Plot the Cropland Data Layer
-#' x <- new("Cropmaps", region = region, date = date, dir = dir)
+#' ## Quickstats Progress
+#'
+#' # Create the object
+#' x <- new("Cropmaps", region = region, date = date)
+#'
+#' # Plot
 #' variable <- "cdl"
-#' download(x, variable)
 #' plot(x, variable, crops = c("Soybeans", "Winter Wheat"), year = 2002)
 #'
-#' # Plot the Daymet minimum temperature
+#' ## Daymet Tmin
+#'
+#' # Create the object
 #' x <- new("Daymet", region = region, date = date, dir = dir)
-#' download(x, variable = "tmin")
+#'
+#' # Plot
 #' plot(x, "tmin", "2002-01-01")
 #' }
 setGeneric("plot")
@@ -149,7 +154,7 @@ setMethod("plot",
 #' @rdname plot
 setMethod("plot",
           signature  = c(x = "Daymet", y = "character"),
-          definition = function(x, y, date) {
+          definition = function(x, y, date = NULL) {
 
   # Get slots
   region <- x@region
@@ -172,61 +177,3 @@ setMethod("plot",
   terra::plot(ras, main = main, axes = FALSE)
 
 })
-
-# plot_mean <- function(x, crops, date) {
-#   # Get the toi
-#   toi <- get_toi(date)
-#   year <- get_toi(date)$uyear
-#
-#   y <- do.call("rbind", x)
-#   y$Date <- pdoy_to_date(y$pdoy)
-#   names(y)[1] <- "Crop"
-#   y$Year = lubridate::year(y$Date)
-#   z <- dplyr::filter(y, Crop %in% crops)
-#   z <- dplyr::filter(z, Year %in% year)
-#   ggplot(z) +
-#     geom_line(aes(x = Date, y = ndvi_smooth_wt1, col = Crop)) +
-#     xlim(date[1], date[length(date)]) +
-#     ylim(0, 1) +
-#     theme_minimal()
-# }
-#
-# plot_pixels <- function(crop = NULL, size = 20, region, date, dir = getwd(), seed = 32091) {
-#
-#   # Get the toi
-#   toi <- get_toi(date)
-#
-#   # Get the directories
-#   product1 <- "MOD09GA"
-#   variable1 <- "ndvi_smooth_wt1"
-#   product2 <- "cropmaps"
-#   variable2 <- "cdl1"
-#   dir_var1 <- create_db(dir, region, product = product1, variable = variable1)
-#   dir_var2 <- create_db(dir, region, product = product2, variable = variable2)
-#   dir_var3 <- create_db(dir, region, product = product1, variable = "tseries")
-#   path_var1 <- file.path(dir_var1, paste0(toi$name, ".tif"))
-#   path_var2 <- file.path(dir_var2, paste0(toi$uyear, ".tif"))
-#   path_var3 <- file.path(dir_var3, paste0(variable1, ".RData"))
-#
-#   # Load the rasters
-#   year <- get_toi(date)$uyear
-#   ras_var1 <- terra::rast(path_var1[toi$year == year])
-#   ras_var2 <- terra::rast(path_var2[toi$uyear == year])
-#   ras_var2 <- terra::project(ras_var2, ras_var1, method = "near")
-#   set.seed(seed)
-#   x <- terra::as.matrix(ras_var2 == crop)
-#   y <- ras_var1[which(x == TRUE)[sample(1:sum(x, na.rm = TRUE), size = size)]]
-#
-#   df = data.frame(x = rep(date, each = size),
-#                   y = as.numeric(t(do.call("rbind", y))),
-#                   pixel = rep(1:size, length(date)))
-#
-#   ggplot(df) +
-#     geom_line(aes(x = x, y = y, group = pixel)) +
-#     xlim(date[1], date[length(date)]) +
-#     ylim(0, 1) +
-#     labs(title = paste0(crop, " pixels, ", year), ylab = "NDVI", xlab = "Date") +
-#     theme_minimal()
-#
-# }
-

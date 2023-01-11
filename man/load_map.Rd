@@ -31,12 +31,17 @@ Load rasters stored in the cronus database.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
-date <- date_seq("2002-07-15", "2002-07-16")
-dir <- getwd()
+date <- date_seq("2002-01-01", "2002-12-31")
 
-x <- new("Daymet", region = region, date = date, dir = dir)
+## Daymet
+
+# Create the object
+x <- new("Daymet", region = region, date = date)
+
+# Load the map
 variable <- "gdd"
 load_map(x, variable)
 load_map(x, variable, as.Date("2002-08-01"))

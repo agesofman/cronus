@@ -6,11 +6,10 @@
 \alias{Region}
 \title{Region class}
 \value{
-an object of class Region
+an object of class \code{Region}.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
 An S4 class that defines a region of interest.
 }
 \section{Slots}{
@@ -18,12 +17,12 @@ An S4 class that defines a region of interest.
 \describe{
 \item{\code{name}}{character. The name of the region.}
 
-\item{\code{type}}{character. The type of the region}
+\item{\code{type}}{character. The type of the region.}
 
-\item{\code{id}}{ANY. An appropriate ID for the region}
+\item{\code{id}}{ANY. An appropriate ID for the region.}
 
-\item{\code{div}}{character. A named character vector specifying the divisions, starting
-from the country level and stopping at the region's level.}
+\item{\code{div}}{character. A named character vector specifying the divisions,
+starting from the country level and stopping at the region's level.}
 }}
 
 \examples{

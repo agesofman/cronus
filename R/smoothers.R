@@ -6,7 +6,6 @@
 #' @title Whittaker 1st order smoother
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Apply the whittaker 1st order smoother to a matrix.
 #'
 #' @param x matrix. The data to smooth by row.

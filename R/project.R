@@ -6,34 +6,36 @@
 #' @title Project rasters
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Project a raster variable to match another raster variable.
 #'
 #' @param x S4 object. A product of interest.
 #' @param y S4 object. A product of interest.
 #' @param variablex character. The variable of product \code{x}.
 #' @param variabley character. The variable of product \code{y}.
-#' @param varname character. The name of the projected variable.
+#' @param newvarname character. The name of the projected variable.
 #' @param ... extra arguments.
 #'
 #' @return nothing. The data are saved directly in the cronus database.
 #'
 #' @export
-#' @importFrom terra terraOptions rast project
+#' @importFrom terra terraOptions rast project setGDALconfig
 #' @importFrom progress progress_bar
-#' @importFrom rgdal setCPLConfigOption
 #'
 #' @examples
 #' \dontrun{
+#' # Define required variables
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
-#' dir <- getwd()
 #'
-#' # Project the CDL to match the Daymet tmin variable
-#' x <- new("Cropmaps", region = region, date = date, dir = dir)
-#' y <- new("Daymet", region = region, date = date, dir = dir)
-#' project(x, y, "cdl", "tmin", "cdl_default")
+#' ## Cropmaps CDL and Daymet
+#'
+#' # Create objects
+#' x <- new("Cropmaps", region = region, date = date)
+#' y <- new("Daymet", region = region, date = date)
+#'
+#' # Project
+#' project(x, y, variablex = "cdl", variabley = "tmin", "cdl_projected")
 #' }
 setGeneric("project", signature = c("x", "y"),
            function(x, y, ...) { standardGeneric("project") })
@@ -41,7 +43,7 @@ setGeneric("project", signature = c("x", "y"),
 #' @rdname project
 setMethod("project",
           signature  = c(x = "Cropmaps", y = "Daymet"),
-          definition = function(x, y, variablex, variabley, varname = variablex) {
+          definition = function(x, y, variablex, variabley, newvarname = variablex) {
 
   # Get slots
   region <- x@region
@@ -60,7 +62,7 @@ setMethod("project",
   # Get the directories
   dir_varx <- create_db(dir, region, product = productx, variable = variablex)
   dir_vary <- create_db(dir, region, product = producty, variable = variabley)
-  dir_varz <- create_db(dir, region, product = productx, variable = varname)
+  dir_varz <- create_db(dir, region, product = productx, variable = newvarname)
   path_varx <- file.path(dir_varx, paste0(year, ".tif"))
   path_vary <- file.path(dir_vary, paste0(toi$name[1], ".tif"))
   path_varz <- file.path(dir_varz, paste0(year, ".tif"))
@@ -70,7 +72,7 @@ setMethod("project",
   pb <- progress::progress_bar$new(format = frm, total = length(year), clear = FALSE)
 
   # Allow for auxiliary files and colours
-  rgdal::setCPLConfigOption("GDAL_PAM_ENABLED", "TRUE")
+  terra::setGDALconfig("GDAL_PAM_ENABLED", "TRUE")
 
   # Raster template
   rast_vary <- terra::rast(path_vary)

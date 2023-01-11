@@ -18,28 +18,33 @@ smoothout(x, ...)
 
 \item{smoother}{character. A function to be applied on the original data.}
 
-\item{pre}{character. A vector of dates to be used as an extra smoothing window before the dates of interest.}
+\item{pre}{character. A vector of dates to be used as an extra smoothing
+window before the dates of interest.}
 
-\item{post}{character. A vector of dates to be used as an extra smoothing window after the dates of interest.}
+\item{post}{character. A vector of dates to be used as an extra smoothing
+window after the dates of interest.}
 }
 \value{
 nothing. The smoothed data are saved directly in the cronus database.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
-Smooth raster time-series and interpolate missing values using a smoother function.
+Smooth raster time-series and interpolate missing values using a smoother
+function.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2002-12-31")
-dir <- getwd()
 
-x <- new("Mod09ga", region = region, date = date, dir = dir)
-pre <- NULL
-post <- NULL
-smoothout(x, "ndvi", pre = pre, post = post)
+## MOD09GA
+
+# Create the object
+x <- new("Mod09ga", region = region, date = date)
+
+# Smooth the raster cell time-series
+smoothout(x, "ndvi", pre = NULL, post = NULL)
 }
 }

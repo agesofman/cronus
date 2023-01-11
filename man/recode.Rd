@@ -7,35 +7,48 @@
 \usage{
 recode(x, ...)
 
-\S4method{recode}{Cropmaps}(x, variable, mdname, varname = variable)
+\S4method{recode}{Cropmaps}(x, variable, mdname, newvarname = variable)
 }
 \arguments{
 \item{x}{S4 object. A product of interest.}
 
 \item{...}{extra arguments.}
 
-\item{variable}{character. A function to compute the variable of interest.}
+\item{variable}{character. The variable of interest.}
 
 \item{mdname}{character. The metadata file names needed for the recoding.}
 
-\item{varname}{character. The name of the recoded variable.}
+\item{newvarname}{character. The name of the recoded variable.}
 }
 \value{
 nothing. The data are saved directly in the cronus database.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
 Recode variables using metadata.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2002-12-31")
-dir <- getwd()
 
-x <- new("Cropmaps", region = region, date = date, dir = dir)
-recode(x, "cdl_default", mdname = "default")
+## Cropmaps CDL
+
+# Create the object
+x <- new("Cropmaps", region = region, date = date)
+
+# Get the current categories data.frame
+df_cat <- terra::cats(cdl_2020)[[1]]
+
+# Define a transformation table
+tb_rcl <- cbind(a = c(121:124, 141:143), b = c(rep(82, 4), rep(63, 3)))
+
+# Write the metadata
+write(x, name = "my_metadata", df_cat = df_cat, tb_rcl = tb_rcl)
+
+# Recode the raster
+recode(x, variable = "cdl_projected", mdname = "my_metadata", newvarname = "cdl_recoded")
 }
 }

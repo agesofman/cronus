@@ -6,27 +6,36 @@
 #' Fill gaps
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
-#' Find dates for which the raster is missing and fill the gap with an empty raster.
+#' Find dates for which the raster is missing and fill the gap with an empty
+#' raster.
 #'
 #' @param x S4 object. The product of interest.
 #' @param variable character. The variable of interest.
 #' @param ... extra arguments.
 #'
 #' @return nothing. The data are saved directly in the cronus database.
-#' @export
+#'
 #' @importFrom terra rast values writeRaster
 #' @importFrom progress progress_bar
+#' @export
 #'
 #' @examples
 #' \dontrun{
+#' # Define required variables
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
-#' dir <- getwd()
 #'
-#' x <- new("Mod09ga", region = region, date = date, dir = dir)
+#' ## MOD09GA
+#'
+#' # Create objects
+#' x <- new("Mod09ga", region = region, date = date)
+#'
+#' # Create the NDVI rasters that are missing
 #' fillgaps(x, "ndvi")
+#'
+#' # Create the cloud mask rasters that are missing
+#' fillgaps(x, "cloudmask")
 #' }
 setGeneric("fillgaps", signature = c("x"),
            function(x, ...) { standardGeneric("fillgaps") })

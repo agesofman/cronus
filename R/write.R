@@ -22,20 +22,29 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Define required variables
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
-#' dir <- getwd()
 #'
-#' x <- new("Parameters", region = region, date = date, dir = dir)
-#' # tb_ct is a matrix with cardinal temperatures
-#' write_metadata(x, name = "default", tb_ct = tb_ct)
+#' ## Parameters
+#'
+#' # Create the object
+#' x <- new("Parameters", region = region, date = date)
+#'
+#' # Define the cardinal temperatures metadata
+#' tb_ct <- rbind('Dry Beans' = c(Tb = 4.0,  To = 23.0, Tc = 32.0),
+#'                'Corn'      = c(Tb = 10.0, To = 30.0, Tc = 50.0),
+#'                'Soybeans'  = c(Tb = 6.0,  To = 26.0, Tc = 39.0))
+#'
+#'# Write the metadata
+#'write(y, name = "default", tb_ct = tb_ct)
 #' }
-setGeneric("write_metadata", signature = c("x"),
-           function(x, ...) { standardGeneric("write_metadata") })
+setGeneric("write", signature = c("x"),
+           function(x, ...) { standardGeneric("write") })
 
-#' @rdname write_metadata
-setMethod("write_metadata",
+#' @rdname write
+setMethod("write",
           signature  = c(x = "Cropmaps"),
           definition = function(x, name, df_cat = NULL, tb_rcl = NULL) {
 
@@ -62,8 +71,8 @@ setMethod("write_metadata",
 
 })
 
-#' @rdname write_metadata
-setMethod("write_metadata",
+#' @rdname write
+setMethod("write",
           signature  = c(x = "Parameters"),
           definition = function(x, name, tb_ct = NULL) {
 

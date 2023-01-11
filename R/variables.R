@@ -6,16 +6,15 @@
 #' @title Rename crops
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Change specific crop names to avoid duplicates.
 #'
 #' @param crop character. A vector of crop names.
 #'
-#' @return A character vector of the same dimensions as \code{crops}.
+#' @return A character vector of the same dimensions as `crops`.
 #'
-#' @export
 #' @importFrom stringr str_to_title
 #' @importFrom EnvStats dtri
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -32,14 +31,13 @@ rename_crops <- function(crop) {
 #' Truncate value
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Truncate the values of a vector between a lower and an upper limit.
 #'
 #' @param x numeric. A vector of values to be truncated.
 #' @param a numeric. The lower truncation limit.
 #' @param b numeric. The upper truncation limit.
 #'
-#' @return A vector with the same dimensions as \code{x}.
+#' @return A vector with the same dimensions as `x`.
 #' @export
 #'
 #' @examples
@@ -54,7 +52,6 @@ trunc_minmax <- function(x, a, b) {
 #' @title Compute Growing Degree Days (GDD)
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Compute a common expression of thermal time, the Growing Degree Days (GDD).
 #'
 #' @param x numeric. Minimum temperature.
@@ -62,7 +59,7 @@ trunc_minmax <- function(x, a, b) {
 #' @param a character. Crop name.
 #' @param tb_ct matrix. The metadata storing the crop cardinal temperatures.
 #'
-#' @return A vector with the same dimensions as \code{x} and \code{y}.
+#' @return A vector with the same dimensions as `x` and `y`.
 #' @export
 gdd <- function(x, y, a, tb_ct) {
 
@@ -83,13 +80,12 @@ gdd <- function(x, y, a, tb_ct) {
 #' @title Compute MODIS Normalized Difference Vegetation Index (NDVI)
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
 #' Compute MODIS Normalized Difference Vegetation Index (NDVI)
 #'
 #' @param x numeric. Near-Infrared reflectance.
 #' @param y numeric. Red reflectance.
 #'
-#' @return A vector with the same dimensions as \code{x} and \code{y}.
+#' @return A vector with the same dimensions as `x` and `y`.
 #' @export
 ndvi <- function(x, y) {
   x[x < 0] <- NA
@@ -102,12 +98,14 @@ ndvi <- function(x, y) {
 #' @title Compute MODIS cloudmask
 #'
 #' @description `r lifecycle::badge("stable")`
-#'
+
 #' Compute MODIS cloudmask
 #'
 #' @param x numeric. MODIS QA values.
 #'
-#' @return A vector with the same dimensions as \code{x}, taking the values \code{1} and \code{NA} for clear and cloudy pixels, respectively.
+#' @return A vector with the same dimensions as `x`, taking the values `1` and
+#' `NA` for clear and cloudy pixels, respectively.
+#'
 #' @export
 cloudmask <- function(x) {
   v <- matrix(as.numeric(matrix(intToBits(x), ncol = 32, byrow = TRUE)[, 1:3]), ncol = 3)

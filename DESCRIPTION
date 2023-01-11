@@ -1,6 +1,6 @@
 Package: cronus
 Title: Agricultural Remote Sensing Database Constructor
-Version: 0.0.1.9000
+Version: 0.0.2
 Authors@R: c(
     person(given = "Ioannis", family = "Oikonomidis",
            email = "goikon@math.uoa.gr", role = c("aut", "cre"),
@@ -15,7 +15,6 @@ Depends:
     R (>= 4.0.0)
 Imports: 
     cdlTools,
-    cli,
     dplyr,
     EnvStats,
     FedData,
@@ -30,9 +29,9 @@ Imports:
     methods,
     progress,
     ptw,
-    rgdal,
     rlang,
     rnassqs,
+    rprojroot,
     rsat,
     stats,
     stringr,
@@ -40,11 +39,11 @@ Imports:
     tidyr,
     tigris,
     utils,
-    withr,
     zip
 Suggests: 
     covr,
     knitr,
+    ncdf4,
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: 

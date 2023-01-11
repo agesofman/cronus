@@ -56,7 +56,12 @@ An S4 object of the appropriate class (constructor functions).
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-cronus creates a database, which takes the form of a 5-level directory. These levels are Region > Sector > Provider > Product > Variable. For a specific region, data can belong to one of three sectors: agricultural, environmental or satellite. Data are made available by a provider, usually an organization or a lab, which organizes the data in one or more products. Each product contains several variables of interest.
+cronus creates a database, which takes the form of a 5-level directory. These
+levels are Region > Sector > Provider > Product > Variable. For a specific
+region, data can belong to one of three sectors: agricultural, environmental
+or satellite. Data are made available by a provider, usually an organization
+or a lab, which organizes the data in one or more products. Each product
+contains several variables of interest.
 
 The class tree structure is the following:
 \itemize{
@@ -100,7 +105,9 @@ The class tree structure is the following:
 }
 }
 
-Classes \code{Database}, \code{Sector}, \code{Provider}, and \code{Product} are also defined, but are abstract classes that exist solely for hierarchical purposes.
+Classes \code{Database}, \code{Sector}, \code{Provider}, and \code{Product}
+are also defined, but are abstract classes that exist solely for hierarchical
+purposes.
 }
 \section{Slots}{
 
@@ -109,17 +116,24 @@ Classes \code{Database}, \code{Sector}, \code{Provider}, and \code{Product} are 
 
 \item{\code{date}}{Date. Dates of interest (vector).}
 
-\item{\code{dir}}{character. The database parent directory.}
+\item{\code{dir}}{character. The database parent directory. If the path_demeter
+environment variable has been set, it can be omitted.}
 }}
 
 \examples{
 \dontrun{
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
-date <- date_seq("2002-01-01", "2021-12-31")
-dir <- get_path_demeter()
+date <- as.Date("2020-07-15")
+dir <- getwd()
 
-x <- new("Quickstats", region = region, date = date, dir = dir)
-y <- Cropmaps(region = region, date = date, dir = dir)
+w <- new("Quickstats", region = region, date = date, dir = dir)
+x <- new("Cropmaps", region = region, date = date, dir = dir)
+y <- new("Daymet", region = region, date = date, dir = dir)
+z <- new("Mod09ga", region = region, date = date, dir = dir)
+
 }
+}
+\seealso{
+\code{\link[=set_path_demeter]{set_path_demeter()}}
 }

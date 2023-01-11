@@ -28,12 +28,14 @@ download(x, ...)
 \item{ringname}{character. A keyring to handle the provider credentials.}
 }
 \value{
-For most products, nothing is returned. The data are saved directly in the cronus database. For lightweight data (such as variables of the quickstats product), the downloaded data are returned (as a data.frame).
+For most products, nothing is returned. The data are saved directly
+in the cronus database. For lightweight data (such as variables of the
+Quickstats product), the downloaded data are returned.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
-Download agricultural, environmental, or satellite data for a region and time of interest.
+Download agricultural, environmental, or satellite data for a region and time
+of interest.
 }
 \details{
 Currently, the function can download:
@@ -45,37 +47,66 @@ Currently, the function can download:
 \item The Landsat TM, ETM and 8 products.
 \item The Sentinel-2 MSI and Sentinel-3 Synergy products.
 }
+
+Details concerning the Quickstats product:
+The function is a wrapper of the \code{nassqs()} function from the \code{rnassqs}
+package. In order to download the data, an API key is required; information
+can be found in the \code{rnassqs} package vignette.
+
+Details concerning the Daymet product:
+The S4 class \code{Daymet} can be used to handle data of the daymet product. It is
+a wrapper of the \code{get_daymet()} function from the \code{FedData} package.
+
+Details concerning the satellite sector:
+This function uses the \code{rsat::rsat_search()} function to search for available
+products in the requested dates. Then, it recursively calls
+\code{rsat::rsat_download()} and \code{rsat::rsat_mosaic()} to download and mosaic the
+data, before deleting the original hdf files to save disk space. The
+satellite data are extracted in GeoTiff format (zipped).
+The recursive call of the function has a slight performance impact, but it is
+crucial in order to download data over large regions and periods of time.
+For example, assume we want to download the MOD09GA product for the state of
+Nebraska for one day. The (3) hdf files required combined surpass 250MB of
+memory space, while the mosaiced, zipped Geotiff images take about 15MB.
 }
 \examples{
 \dontrun{
+# Define required variables
 region <- Region(name = "nebraska", type = "us state",
                  div = c(country = "United States", state = "Nebraska"))
 date <- date_seq("2002-01-01", "2002-12-31")
-dir <- getwd()
 
-# Create a keyring
-ringname <- "my_ringname"
-password <- "my_password"
-create_keyring(ringname, password)
-log_in(ringname, password)
+## Quickstats Progress
 
-# Add an API to download the quickstats data.
-add_key(ringname = ringname,
-        provider = "nass",
-        username = NULL,
-        password = "nass_key")
+# Create the object
+x <- new("Quickstats", region = region, date = date)
 
-# Download the progress variable from the Quickstats product.
-x <- new("Quickstats", region = region, date = date, dir = dir)
-variable <- "progress"
-data <- download(x, variable, ringname)
+# Download the data
+data <- download(x, "progress", ringname)
+head(data$Corn)
 
-# Download the Cropland Data Layer (CDL) variable from the Cropmaps product.
-x <- new("Cropmaps", region = region, date = date, dir = dir)
-variable <- "cdl"
-download(x, variable)
+## Cropmaps CDL
 
-log_out(ringname)
+# Create the object
+x <- new("Cropmaps", region = region, date = date)
 
+# Download the data
+download(x, "cdl")
+
+## Daymet
+
+# Create the object
+x <- new("Daymet", region = region, date = date)
+
+# Download the data
+download(x, c("tmin", "tmax"))
+
+## MOD09GA
+
+# Create the object
+x <- new("Mod09ga", region = region, date = date)
+
+# Download the data
+download(x, ringname)
 }
 }

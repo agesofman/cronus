@@ -10,10 +10,10 @@ cloudmask(x)
 \item{x}{numeric. MODIS QA values.}
 }
 \value{
-A vector with the same dimensions as \code{x}, taking the values \code{1} and \code{NA} for clear and cloudy pixels, respectively.
+A vector with the same dimensions as \code{x}, taking the values \code{1} and
+\code{NA} for clear and cloudy pixels, respectively.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
 Compute MODIS cloudmask
 }

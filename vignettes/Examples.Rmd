@@ -1,0 +1,211 @@
+---
+title: "Examples"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette holds a collection of examples that illustrate the package capabilities. The examples assume that the user has created a keyring and set the default `path_demeter`. See the *Additional Information* section in `vignette("cronus")`. 
+
+```{r setup}
+library(cronus)
+
+region <- Region(name = "nebraska", type = "us state",
+                 div = c(country = "United States", state = "Nebraska"))
+date <- as.Date("2020-07-15")
+```
+
+## Quickstats Progress
+
+The following example shows how to work with the *progress* variable of the *Quickstats* product.
+
+```{r eval = FALSE}
+# Create the object
+x <- new("Quickstats", region = region, date = date)
+
+# Download the data
+variable <- "progress"
+data <- download(x, variable, ringname)
+head(data$Corn)
+
+# Read the data
+progress_2020 <- read(x, variable)
+
+# Plot the data
+plot(x, variable, year = 2020, crops = c("Corn", "Oats"))
+```
+
+## Cropmaps CDL
+
+The following example shows how to work with the *Cropland Data Layer (CDL)* variable of the  *Cropmaps* product.
+
+```{r eval = FALSE}
+# Create the object
+x <- new("Cropmaps", region = region, date = date)
+
+# Download the data
+variable <- "cdl"
+download(x, variable, ringname)
+
+# Load the data
+cdl_2020 <- load_map(x, variable)
+
+# Plot the data
+plot(x, variable, year = 2020, crops = c("Soybeans", "Winter Wheat"))
+```
+
+The CDL cropmaps can be projected using the tmin Daymet variable as a template (assuming it is downloaded and stored in the database - see Daymet example).
+
+```{r, eval = FALSE}
+# Create the object
+y <- new("Daymet", region = region, date = date)
+
+# Project the rasters
+project(x, y, variablex = "cdl", variabley = "tmin", newvarname = "cdl_projected")
+```
+
+The CDL cropmaps are rasters holding categorical values (crop names) in their cells. The following example shows how to access and recode those values. First of all, the actual rasters hold numeric values, but they do come along with a data.frame that tracks the crop name and colour corresponding to each number. Function `terra::cats()` can be used to see the current data.frame. Upon examing the current categories, the user might want to recode some of them. This can be achieved with a 2-column matrix, commonly named `tb_rcl`, which holds the matching values. These two metadata objects can be stored in the database for later use, with the functions `write()` and `read()`:
+
+```{r, eval = FALSE}
+# Get the current categories data.frame
+df_cat <- terra::cats(cdl_2020)[[1]]
+
+# Define a transformation table
+tb_rcl <- cbind(a = c(121:124, 141:143), b = c(rep(82, 4), rep(63, 3)))
+
+# Write the metadata
+write(x, name = "my_metadata", df_cat = df_cat, tb_rcl = tb_rcl)
+
+# Read the metadata
+list_md <- read(x, name = "my_metadata")
+list_md$df_cat
+list_md$tb_rcl
+```
+
+Recoding is straightforward with the function `recode()`, which uses the metadata to transform the variable of interest. A variable can also be summarized into a data.frame holding frequency statistics about the categorical values.
+
+```{r, eval = FALSE}
+# Recode the raster
+recode(x, variable = "cdl_projected", mdname = "my_metadata", newvarname = "cdl_recoded")
+
+# Summarize the raster
+df_summary <- summarize(x, "cdl_recoded")
+```
+
+## Daymet GDD
+
+The following example shows how to work with the *tmin* and *tmax* variables of the  *Daymet* product.
+
+```{r eval = FALSE}
+# Create the object
+x <- new("Daymet", region = region, date = date)
+
+# Download the data
+download(x, c("tmin", "tmax"))
+
+# Plot the data
+plot(z, "tmin")
+```
+
+One very important variable concerning crop development is the thermal time, which is usually expressed in the form of *Growing Degree Days (GDD)*. The concept of GDD revolves around some crop-specific key-temperatures which determine the speed of the development process. The cronus database includes a `Bibliography` provider and a `Parameters` product, inside which this kind of data can be stored.  
+
+```{r, eval = FALSE}
+# Create the object
+y <- new("Parameters", region = region, date = date)
+
+# Define the cardinal temperatures metadata
+tb_ct <- rbind('Dry Beans' = c(Tb = 4.0,  To = 23.0, Tc = 32.0),
+               'Corn'      = c(Tb = 10.0, To = 30.0, Tc = 50.0),
+               'Soybeans'  = c(Tb = 6.0,  To = 26.0, Tc = 39.0))
+
+# Write the metadata
+write(y, name = "default", tb_ct = tb_ct)
+
+# Read the metadata
+tb_ct <- read(y, "default")$tb_ct
+```
+
+The GDD variable can be derived using the labels of the CDL cropmaps.
+
+```{r, eval = FALSE}
+# Create the object
+z <- new("Cropmaps", region = region, date = date)
+
+# Derive GDD
+derive(x, z, "gdd", varxy = c("tmin", "tmax", "cdl_recoded"), tb_ct = tb_ct)
+
+# Plot the map
+plot(x, "gdd")
+```
+
+GDD can also be composed into a time-series, using the CDL variable to group the crops of interest.
+
+```{r, eval = FALSE}
+# Compose the rasters into a time-series
+a <- compose(x, y, variablex = "gdd", variabley = "cdl_recoded", fun = "mean")
+```
+
+## MOD09GA NDVI
+
+The following example shows how to work with the *MOD09GA* product and offers some details concerning the *NDVI* variable.
+
+```{r eval = FALSE}
+# Create the object
+x <- new("Mod09ga", region = region, date = date)
+
+# Download the data
+download(x, ringname)
+```
+
+The following example shows how to derive the NDVI and cloudmask variables of the MOD09GA product.
+
+```{r, eval = FALSE}
+# Derive the NDVI
+derive(x, "ndvi")
+
+# Derive the cloudmask
+derive(x, "cloudmask")
+```
+
+The `fillgaps()` function can be used to create empty (`NA`) rasters for the dates that the product is missing.
+
+```{r, eval = FALSE}
+# Create the NDVI rasters that are missing
+fillgaps(x, "ndvi")
+
+# Create the cloud mask rasters that are missing
+fillgaps(x, "cloudmask")
+```
+
+The `mask()` function can be used to mask one variable based on another.
+
+```{r, eval = FALSE}
+# Apply a cloud mask on the NDVI
+mask(x, "ndvi", "cloudmask")
+```
+
+NDVI can be smoothed using the 1st order whittaker smoother. Date intervals `pre` and `post` can be defined to allow for a better smoothing of the edges.
+
+```{r, eval = FALSE}
+# Smooth the NDVI raster cell time-series
+smoothout(x, "ndvi", pre = NULL, post = NULL)
+```
+
+The smoothed NDVI can be composed in a time-series using the CDL Cropmaps to group the crops of interest.
+
+```{r, eval = FALSE}
+# Create the object
+y <- new("Cropmaps", region = region, date = date)
+
+# Compose the rasters into a time-series
+a <- compose(x, y, variablex = "ndvi_smooth_wt1", variabley = "cdl_recoded", fun = "mean")
+```

@@ -21,12 +21,17 @@
 #'
 #' @examples
 #' \dontrun{
+#' # Define required variables
 #' region <- Region(name = "nebraska", type = "us state",
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
-#' dir <- getwd()
 #'
-#' x <- new("Mod09ga", region = region, date = date, dir = dir)
+#' ## MOD09GA
+#'
+#' # Create objects
+#' x <- new("Mod09ga", region = region, date = date)
+#'
+#' # Apply a cloud mask on NDVI
 #' mask(x, "ndvi", "cloudmask")
 #' }
 setGeneric("mask", signature = c("x"),

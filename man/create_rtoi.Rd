@@ -7,14 +7,14 @@
 create_rtoi(region)
 }
 \arguments{
-\item{region}{character. The region of interest.}
+\item{region}{an object of class Region. The region of interest.}
 }
 \value{
 A data.frame with the requested data.
 }
 \description{
-This function creates an rtoi object for a specific region, according to
-the rsat package.
+This function creates an rtoi object for a specific region,
+according to the rsat package.
 }
 \details{
 \code{create_rtoi()} is a wrapper function, calling the \code{new_rtoi()} function from
