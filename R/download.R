@@ -179,7 +179,8 @@ setMethod("download",
     df_cat <- terra::cats(cdl)[[1]][, c(1, 5, 2, 3, 4, 6)]
     terra::set.cats(cdl, value = df_cat)
     filename <- file.path(path, paste0(year, ".tif"))
-    terra::writeRaster(cdl, filename = filename, overwrite = TRUE)
+    terra::writeRaster(cdl, filename = filename, overwrite = TRUE,
+                       datatype = "INT1U", names = year)
   }
 
 })

@@ -51,8 +51,7 @@ Detailed documentation, along with reproducible examples, can be found in the pa
 ```{r}
 vignette(topic = "cronus", package = "cronus")
 vignette(topic = "Data", package = "cronus")
-vignette(topic = "Download", package = "cronus")
-vignette(topic = "Process", package = "cronus")
+vignette(topic = "Examples", package = "cronus")
 ```
 
 ## Team

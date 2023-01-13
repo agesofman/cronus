@@ -32,7 +32,7 @@ Imports:
     rsat,
     stats,
     stringr,
-    terra,
+    terra (>= 1.6.47),
     tidyr,
     tigris,
     utils,

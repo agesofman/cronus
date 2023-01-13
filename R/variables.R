@@ -68,19 +68,24 @@ trunc_minmax <- function(x, a, b) {
 #' }
 dtri <- function (x, min = 0, max = 1, mode = 0.5) {
 
-  # Calculate the two slopes
-  y_low <- 2 * (x - min)/((max - min) * (mode - min))
-  y_high <- 2 * (max - x)/((max - min) * (max - mode))
+  arg_mat <- cbind(x = as.vector(x), min = as.vector(min),
+                           max = as.vector(max), mode = as.vector(mode))
 
-  # Remove NA for indexing
-  na_index <- is.na(x)
-  x[na_index] <- 0
-
-  # Calculate the density
+  index_na <- is.na(x)
   y <- x
-  y[x <= mode] <- y_low[x <= mode]
-  y[x > mode] <- y_high[x > mode]
-  y[y < 0] <- 0
+  y[index_na] <- NA
+  y_no_na <- y[!index_na]
+
+  for (i in c("x", "min", "max", "mode")) {
+    assign(i, arg_mat[!index_na, i])
+  }
+
+  mmm <- max - min
+  y_no_na <- 2 * ifelse(x <= mode,
+                        (x - min)/(mmm * (mode - min)),
+                        (max - x)/(mmm * (max - mode)))
+  y_no_na[y_no_na < 0] <- 0
+  y[!index_na] <- y_no_na
   y
 
 }
