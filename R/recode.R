@@ -5,7 +5,7 @@
 
 #' @title Recode data
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Recode variables using metadata.
 #'
 #' @param x S4 object. A product of interest.
@@ -84,13 +84,13 @@ setMethod("recode",
   terra::setGDALconfig("GDAL_PAM_ENABLED", "TRUE")
 
   # Recode the rasters
-  for (i in 1:length(year)) {
+  for (i in seq_along(year)) {
     pb$tick()
     rast_var <- terra::rast(path_var[i])
     rast_var <- terra::classify(rast_var, tb_rcl, others = NA)
     terra::set.cats(rast_var, value = df_cat)
-    terra::coltab(rast_var)[[1]] = df_cat[, c("RED", "GREEN", "BLUE", "OPACITY")] * 255
-    terra::writeRaster(rast_var, filename = path_varz[i], overwrite = TRUE)
+    terra::coltab(rast_var)[[1]] <- df_cat[, c("RED", "GREEN", "BLUE", "OPACITY")] * 255
+    terra::writeRaster(rast_var, filename = path_varz[i], overwrite = TRUE, datatype = "INT1U")
   }
 
 })

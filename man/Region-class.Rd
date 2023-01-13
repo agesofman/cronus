@@ -9,7 +9,6 @@
 an object of class \code{Region}.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 An S4 class that defines a region of interest.
 }
 \section{Slots}{

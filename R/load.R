@@ -5,7 +5,7 @@
 
 #' @title Load rasters
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #'
 #' Load rasters stored in the cronus database.
 #'

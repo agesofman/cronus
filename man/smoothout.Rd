@@ -28,7 +28,6 @@ window after the dates of interest.}
 nothing. The smoothed data are saved directly in the cronus database.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Smooth raster time-series and interpolate missing values using a smoother
 function.
 }

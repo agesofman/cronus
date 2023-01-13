@@ -5,7 +5,7 @@
 
 #' @title Plot
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Create a plot of the data stored in the database.
 #'
 #' @param x an S4 object. A product of interest.
@@ -24,7 +24,7 @@
 #' @param height numeric. The height of the plot in inches.
 #' @param ... extra arguments.
 #'
-#' @return A plot, created either with \code{ggplot2} or with \code{terra}.
+#' @return A plot, created either with `ggplot2` or with `terra`.
 #'
 #' @export
 #' @importFrom ggplot2 ggplot geom_line aes labs theme_minimal
@@ -147,8 +147,10 @@ setMethod("plot",
     terra::set.cats(cdl, value = categ)
   }
 
+  # Create the plot
   main <- paste0("Cropland Data Layer - ", stringr::str_to_title(region@name), " ", year)
-  terra::plot(cdl, main = main, axes = FALSE)
+  suppressWarnings(terra::plot(cdl, main = main, axes = FALSE, type = "classes"))
+
 })
 
 #' @rdname plot

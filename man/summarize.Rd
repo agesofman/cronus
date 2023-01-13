@@ -20,7 +20,6 @@ summarize(x, ...)
 data.frame. A data frame with the summarized data.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Summarize raster data into a data frame.
 }
 \examples{

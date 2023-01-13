@@ -5,8 +5,7 @@
 
 #' @title Write metadata
 #'
-#' @description `r lifecycle::badge("stable")`
-#'
+#' @description
 #' Write metadata files in the cronus database.
 #'
 #' @param x S4 object. A product of interest.
@@ -38,13 +37,13 @@
 #'                'Soybeans'  = c(Tb = 6.0,  To = 26.0, Tc = 39.0))
 #'
 #'# Write the metadata
-#'write(y, name = "default", tb_ct = tb_ct)
+#'write_metadata(y, name = "default", tb_ct = tb_ct)
 #' }
-setGeneric("write", signature = c("x"),
-           function(x, ...) { standardGeneric("write") })
+setGeneric("write_metadata", signature = c("x"),
+           function(x, ...) { standardGeneric("write_metadata") })
 
-#' @rdname write
-setMethod("write",
+#' @rdname write_metadata
+setMethod("write_metadata",
           signature  = c(x = "Cropmaps"),
           definition = function(x, name, df_cat = NULL, tb_rcl = NULL) {
 
@@ -71,8 +70,8 @@ setMethod("write",
 
 })
 
-#' @rdname write
-setMethod("write",
+#' @rdname write_metadata
+setMethod("write_metadata",
           signature  = c(x = "Parameters"),
           definition = function(x, name, tb_ct = NULL) {
 

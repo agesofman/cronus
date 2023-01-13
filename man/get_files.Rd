@@ -27,8 +27,6 @@ get_files(x, y, ...)
 A vector or list with the paths required by \code{derive}.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
 Get the file paths needed to derive a variable.
 }
 \examples{

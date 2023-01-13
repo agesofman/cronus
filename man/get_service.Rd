@@ -7,13 +7,12 @@
 get_service(provider)
 }
 \arguments{
-\item{provider}{character. A provider of interest}
+\item{provider}{character. A provider of interest.}
 }
 \value{
 character. The name of the corresponding service.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Get the service that keeps the satellite data stored in order to access the data.
 }
 \examples{

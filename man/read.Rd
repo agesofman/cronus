@@ -39,7 +39,6 @@ read(x, ...)
 The data of interest (list, data.frame, raster, or other).
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Read data stored in the cronus database.
 }
 \examples{

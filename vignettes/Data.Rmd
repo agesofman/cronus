@@ -14,11 +14,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-This vignette provides a brief summary of the products made available from the package. It focuses on the nature of the data, encapsulating useful information such as links to the product providers and does not contain details on the package code.
+This vignette provides a brief summary of the products made available from the package, encapsulating useful information about the data. Every abstract is taken directly from the product provider official website, links for which can be found in the text.
 
-## Agricultural
+## **Agricultural Sector**
+
+The agricultural sector contains crop data measured on the field or reported by the producers. Examples include crop development, biomass accumulation and leaf area index.
 
 ### NASS
+
+The National Agricultural Statistics Service (NASS) of the United States Department of Agriculture (USDA) conducts hundreds of surveys every year and prepares reports covering virtually every aspect of U.S. agriculture. Production and supplies of food and fiber, prices paid and received by farmers, farm labor and wages, farm finances, chemical use, and changes in the demographics of U.S. producers are only a few examples. NASS is committed to providing timely, accurate, and useful statistics in service to U.S. agriculture. For more information, visit the [NASS website](https://www.nass.usda.gov/).
+
 
 #### Quick Stats
 
@@ -26,26 +31,23 @@ The Quick Stats Database is the most comprehensive tool for accessing agricultur
 
 The data include the total crops and cropping practices for each county, and breakouts for irrigated and non-irrigated practices for many crops, for selected States. The database allows custom extracts based on commodity, year, and selected counties within a State, or all counties in one or more States. The county data includes totals for the Agricultural Statistics Districts (county groupings) and the State. The download data files contain planted and harvested area, yield per acre and production.
 
-NASS develops these estimates from data collected through sample surveys conducted each year covering virtually every aspect of U.S. agriculture and the Census of Agriculture conducted every five years providing state- and county-level aggregates. For more information, visit the [NASS website](https://www.nass.usda.gov/).
+NASS develops these estimates from data collected through sample surveys conducted each year covering virtually every aspect of U.S. agriculture and the Census of Agriculture conducted every five years providing state- and county-level aggregates. For more information, visit the [NASS website](https://www.nass.usda.gov/Quick_Stats/).
 
 #### Cropland Data Layers
 
-The National Agricultural Statistical Service (NASS) offers the Cropland Data Layers (CDLs), 1km geospatial maps of estimated crop land use. For more information, visit the [NASS website](https://www.nass.usda.gov/).
+The National Agricultural Statistical Service (NASS) offers the Cropland Data Layers (CDLs), 1km geospatial maps of estimated crop land use. For more information, visit the [NASS website](https://www.nass.usda.gov/Research_and_Science/Cropland/SARS1a.php).
 
+## **Environmental Sector**
 
-### Bibliography
-
-#### Parameters and Metadata
-
-## Environmental
+The environmental sector contains data measured from meteorological stations or other devices, as well as statistically-predicted data (which may be based on satellite data). Examples include temperature, precipitation and soil composition.
 
 ### Oak-Ridge National Laboratory 
 
+Oak Ridge National Laboratory is a multiprogram research laboratory managed by UT-Battelle, LLC, for the U.S. Department of Energy (DOE). The missions of ORNL are primarily for open research. Although a small percentage of ORNL's work is classified or restricted under its growing national security programs, the majority of the laboratory's work is published in the open literature. Many of its facilities are user facilities, which means that they are available to researchers from other national labs, academia and industry. For more information, visit the [ORNL website](https://www.ornl.gov/).
+
 #### Daymet
 
-Daymet provides long-term, continuous, gridded estimates of daily weather and climatology variables by interpolating and extrapolating ground-based observations through statistical modeling techniques.
-
-The Daymet data products provide driver data for biogeochemical terrestrial modeling. Daymet weather variables include
+Daymet is a research product of the Environmental Sciences Division at Oak Ridge National Laboratory, Oak Ridge, TN. It provides long-term, continuous, gridded estimates of daily weather and climatology variables by interpolating and extrapolating ground-based observations through statistical modeling techniques. Daymet data products provide driver data for biogeochemical terrestrial modeling. Daymet weather variables include
 
 -   minimum temperature,
 -   maximum temperature,
@@ -55,6 +57,4 @@ The Daymet data products provide driver data for biogeochemical terrestrial mode
 -   snow water equivalent, and
 -   day length
 
-produced on a 1 km x 1 km gridded surface over continental North America and Hawaii from 1980 and over Puerto Rico from 1950 through the end of the most recent full calendar year.
-
-Daymet is a research product of the Environmental Sciences Division at Oak Ridge National Laboratory, Oak Ridge, TN. For more information, visit the [Daymet website](https://daymet.ornl.gov/).
+produced on a 1 km x 1 km gridded surface over continental North America and Hawaii from 1980 and over Puerto Rico from 1950 through the end of the most recent full calendar year. For more information, visit the [ORNL website](https://daymet.ornl.gov/).

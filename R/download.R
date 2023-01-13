@@ -5,7 +5,7 @@
 
 #' @title Download data
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Download agricultural, environmental, or satellite data for a region and time
 #' of interest.
 #'
@@ -161,6 +161,9 @@ setMethod("download",
   # Get the toi
   toi <- get_toi(date)
 
+  # Allow for auxiliary files and colors
+  terra::setGDALconfig("GDAL_PAM_ENABLED", "TRUE")
+
   # Create the directories
   path <- create_db(dir, region, product = product, variable = variable)
   dir_temp <- tempdir()
@@ -173,6 +176,8 @@ setMethod("download",
     ls_cdl <- list.files(dir_temp, pattern = paste0(year, ".*\\.tif$"),
                          full.names = TRUE)
     cdl <- terra::rast(ls_cdl)
+    df_cat <- terra::cats(cdl)[[1]][, c(1, 5, 2, 3, 4, 6)]
+    terra::set.cats(cdl, value = df_cat)
     filename <- file.path(path, paste0(year, ".tif"))
     terra::writeRaster(cdl, filename = filename, overwrite = TRUE)
   }

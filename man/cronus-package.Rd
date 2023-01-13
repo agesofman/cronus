@@ -14,6 +14,7 @@ cronus is an R package that focuses on database creation. It can be used to down
 Useful links:
 \itemize{
   \item \url{https://github.com/agesofman/cronus}
+  \item \url{https://agesofman.github.io/cronus/}
   \item Report bugs at \url{https://github.com/agesofman/cronus/issues}
 }
 

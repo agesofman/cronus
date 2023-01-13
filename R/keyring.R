@@ -5,7 +5,7 @@
 
 #' Manage keys and keyrings
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #'
 #' This set of functions handles keys that are needed to download products such
 #' as satellite data.

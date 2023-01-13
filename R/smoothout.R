@@ -5,7 +5,7 @@
 
 #' @title Smooth raster time-series
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Smooth raster time-series and interpolate missing values using a smoother
 #' function.
 #'
@@ -91,7 +91,7 @@ setMethod("smoothout",
                                    clear = FALSE)
 
   # Save the rasters
-  for (i in 1:length(date)) {
+  for (i in seq_along(date)) {
     pb$tick()
     terra::writeRaster(temp[[toi$name[i]]], filename = path_smooth[i],
                        overwrite = TRUE)

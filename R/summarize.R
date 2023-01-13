@@ -5,7 +5,7 @@
 
 #' @title Summarize raster data
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Summarize raster data into a data frame.
 #'
 #' @param x S4 object. A product of interest.

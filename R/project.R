@@ -5,13 +5,13 @@
 
 #' @title Project rasters
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Project a raster variable to match another raster variable.
 #'
 #' @param x S4 object. A product of interest.
 #' @param y S4 object. A product of interest.
-#' @param variablex character. The variable of product \code{x}.
-#' @param variabley character. The variable of product \code{y}.
+#' @param variablex character. The variable of product `x`.
+#' @param variabley character. The variable of product `y`.
 #' @param newvarname character. The name of the projected variable.
 #' @param ... extra arguments.
 #'
@@ -59,6 +59,9 @@ setMethod("project",
   # No progress bar
   terra::terraOptions(progress = 0)
 
+  # Allow for auxiliary files and colors
+  terra::setGDALconfig("GDAL_PAM_ENABLED", "TRUE")
+
   # Get the directories
   dir_varx <- create_db(dir, region, product = productx, variable = variablex)
   dir_vary <- create_db(dir, region, product = producty, variable = variabley)
@@ -71,17 +74,14 @@ setMethod("project",
   frm <- paste0("Projecting ", variablex, " [:bar] :percent | Remaining: :eta | Elapsed: :elapsedfull")
   pb <- progress::progress_bar$new(format = frm, total = length(year), clear = FALSE)
 
-  # Allow for auxiliary files and colours
-  terra::setGDALconfig("GDAL_PAM_ENABLED", "TRUE")
-
   # Raster template
   rast_vary <- terra::rast(path_vary)
 
   # Project the rasters
-  for (i in 1:length(year)) {
+  for (i in seq_along(year)) {
     pb$tick()
     rast_varx <- terra::rast(path_varx[i])
-    rast_varx <- terra::project(rast_varx, rast_vary, method = "near", filename = path_varz[i], overwrite = TRUE, wopt = list(names = year[i]))
+    terra::project(rast_varx, rast_vary, method = "near", filename = path_varz[i], overwrite = TRUE, wopt = list(datatype = "INT1U", names = year[i]))
   }
 
 })

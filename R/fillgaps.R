@@ -5,7 +5,7 @@
 
 #' Fill gaps
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Find dates for which the raster is missing and fill the gap with an empty
 #' raster.
 #'

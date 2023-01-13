@@ -55,7 +55,6 @@
 An S4 object of the appropriate class (constructor functions).
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 cronus creates a database, which takes the form of a 5-level directory. These
 levels are Region > Sector > Provider > Product > Variable. For a specific
 region, data can belong to one of three sectors: agricultural, environmental

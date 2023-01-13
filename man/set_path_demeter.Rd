@@ -15,7 +15,7 @@ get_path_demeter()
 \item{level}{character. The level of profile, one of 'user' or 'project'.}
 }
 \value{
-nothing. The .RPenviron file is edited.
+nothing. The .Renviron file is edited.
 }
 \description{
 Set or get the default path_demeter by editing the .Renviron

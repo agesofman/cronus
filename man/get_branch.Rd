@@ -51,8 +51,6 @@ tree form.
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
 Get the relative or absolute path to a branch of the \code{cronus} database.
 }
 \examples{

@@ -13,7 +13,6 @@ rename_crops(crop)
 A character vector of the same dimensions as \code{crops}.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Change specific crop names to avoid duplicates.
 }
 \examples{

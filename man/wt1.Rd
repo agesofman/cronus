@@ -9,13 +9,12 @@ wt1(x, lambda = 50)
 \arguments{
 \item{x}{matrix. The data to smooth by row.}
 
-\item{lambda}{numeric. The smoother paramater.}
+\item{lambda}{numeric. The smoother parameter.}
 }
 \value{
 A matrix with the same dimensions as \code{x}.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Apply the whittaker 1st order smoother to a matrix.
 }
 \examples{

@@ -5,13 +5,13 @@
 
 #' @title Whittaker 1st order smoother
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Apply the whittaker 1st order smoother to a matrix.
 #'
 #' @param x matrix. The data to smooth by row.
-#' @param lambda numeric. The smoother paramater.
+#' @param lambda numeric. The smoother parameter.
 #'
-#' @return A matrix with the same dimensions as \code{x}.
+#' @return A matrix with the same dimensions as `x`.
 #' @export
 #' @importFrom ptw whit1
 #'

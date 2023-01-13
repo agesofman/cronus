@@ -5,7 +5,7 @@
 
 #' @title Get files
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #'
 #' Get the file paths needed to derive a variable.
 #'
@@ -72,7 +72,7 @@ setMethod("get_files",
     dir_tmax <- create_db(dir, region, product = productx, variable = varxy[2])
     dir_cdl <- create_db(dir, region, product = producty, variable = varxy[3])
 
-    for (i in 1:length(date)) {
+    for (i in seq_along(date)) {
       files[[i]] <- c(file.path(dir_tmin, paste0(toi$name[i], ".tif")),
                       file.path(dir_tmax, paste0(toi$name[i], ".tif")),
                       file.path(dir_cdl, paste0(toi$year[i], ".tif")))

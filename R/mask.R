@@ -5,9 +5,9 @@
 
 #' Mask rasters
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #'
-#' Mask a raster variable using anothe raster variable as the mask.
+#' Mask a raster variable using another raster variable as the mask.
 #'
 #' @param x S4 object. The product of interest.
 #' @param variable1 character. The variable to be masked.
@@ -62,7 +62,7 @@ setMethod("mask",
   pb <- progress::progress_bar$new(format = frm, total = length(date), clear = FALSE)
 
   # Mask the rasters
-  for (i in 1:length(date)) {
+  for (i in seq_along(date)) {
     pb$tick()
     ras_var1 <- terra::rast(path_var1[i])
     ras_var2 <- terra::rast(path_var2[i])

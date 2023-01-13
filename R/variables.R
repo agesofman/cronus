@@ -5,7 +5,7 @@
 
 #' @title Rename crops
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Change specific crop names to avoid duplicates.
 #'
 #' @param crop character. A vector of crop names.
@@ -13,7 +13,6 @@
 #' @return A character vector of the same dimensions as `crops`.
 #'
 #' @importFrom stringr str_to_title
-#' @importFrom EnvStats dtri
 #' @export
 #'
 #' @examples
@@ -28,9 +27,9 @@ rename_crops <- function(crop) {
   crop
 }
 
-#' Truncate value
+#' @title Truncate value
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Truncate the values of a vector between a lower and an upper limit.
 #'
 #' @param x numeric. A vector of values to be truncated.
@@ -49,9 +48,46 @@ trunc_minmax <- function(x, a, b) {
   pmax(pmin(x, b), a)
 }
 
+#' @title Triangular distribution density
+#'
+#' @description
+#' Calculate the triangular density function value.
+#'
+#' @param x numeric. A vector of values.
+#' @param min numeric. The support minimum.
+#' @param max numeric. The support maximum.
+#' @param mode numeric. The mode (argmax) of the density function.
+#'
+#' @return A vector of the same length as `x`.
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' x <- c(0.2, 0.5, -2, 1.5, NA)
+#' dtri(x, min = 0, max = 1, mode = 0.5)
+#' }
+dtri <- function (x, min = 0, max = 1, mode = 0.5) {
+
+  # Calculate the two slopes
+  y_low <- 2 * (x - min)/((max - min) * (mode - min))
+  y_high <- 2 * (max - x)/((max - min) * (max - mode))
+
+  # Remove NA for indexing
+  na_index <- is.na(x)
+  x[na_index] <- 0
+
+  # Calculate the density
+  y <- x
+  y[x <= mode] <- y_low[x <= mode]
+  y[x > mode] <- y_high[x > mode]
+  y[y < 0] <- 0
+  y
+
+}
+
 #' @title Compute Growing Degree Days (GDD)
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Compute a common expression of thermal time, the Growing Degree Days (GDD).
 #'
 #' @param x numeric. Minimum temperature.
@@ -73,13 +109,13 @@ gdd <- function(x, y, a, tb_ct) {
 
   Tav <- (x + y) / 2
 
-  EnvStats::dtri(Tav, min = Tb, max = Tc, mode = To) * (Tc - Tb) / 2
+  dtri(Tav, min = Tb, max = Tc, mode = To) * (Tc - Tb) / 2
 
 }
 
 #' @title Compute MODIS Normalized Difference Vegetation Index (NDVI)
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Compute MODIS Normalized Difference Vegetation Index (NDVI)
 #'
 #' @param x numeric. Near-Infrared reflectance.
@@ -97,7 +133,7 @@ ndvi <- function(x, y) {
 
 #' @title Compute MODIS cloudmask
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 
 #' Compute MODIS cloudmask
 #'

@@ -20,7 +20,6 @@ fillgaps(x, ...)
 nothing. The data are saved directly in the cronus database.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Find dates for which the raster is missing and fill the gap with an empty
 raster.
 }

@@ -5,7 +5,7 @@
 
 #' @title Compose rasters by maps
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Compose Rasters into zonal summaries, indicated by another raster.
 #'
 #' @param x S4 object. The product of interest.

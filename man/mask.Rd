@@ -22,9 +22,7 @@ mask(x, ...)
 nothing. The data are saved directly in the cronus database.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
-
-Mask a raster variable using anothe raster variable as the mask.
+Mask a raster variable using another raster variable as the mask.
 }
 \examples{
 \dontrun{

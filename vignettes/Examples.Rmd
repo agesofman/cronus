@@ -73,7 +73,7 @@ y <- new("Daymet", region = region, date = date)
 project(x, y, variablex = "cdl", variabley = "tmin", newvarname = "cdl_projected")
 ```
 
-The CDL cropmaps are rasters holding categorical values (crop names) in their cells. The following example shows how to access and recode those values. First of all, the actual rasters hold numeric values, but they do come along with a data.frame that tracks the crop name and colour corresponding to each number. Function `terra::cats()` can be used to see the current data.frame. Upon examing the current categories, the user might want to recode some of them. This can be achieved with a 2-column matrix, commonly named `tb_rcl`, which holds the matching values. These two metadata objects can be stored in the database for later use, with the functions `write()` and `read()`:
+The CDL cropmaps are rasters holding categorical values (crop names) in their cells. The following example shows how to access and recode those values. First of all, the actual rasters hold numeric values, but they do come along with a data.frame that tracks the crop name and color corresponding to each number. Function `terra::cats()` can be used to see the current data.frame. Upon examining the current categories, the user might want to recode some of them. This can be achieved with a 2-column matrix, commonly named `tb_rcl`, which holds the matching values. These two metadata objects can be stored in the database for later use, with the functions `write()` and `read()`:
 
 ```{r, eval = FALSE}
 # Get the current categories data.frame

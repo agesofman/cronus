@@ -17,7 +17,6 @@ trunc_minmax(x, a, b)
 A vector with the same dimensions as \code{x}.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Truncate the values of a vector between a lower and an upper limit.
 }
 \examples{

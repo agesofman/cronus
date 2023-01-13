@@ -5,7 +5,7 @@
 
 #' @title Read data
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Read data stored in the cronus database.
 #'
 #' @param x S4 object. A product of interest.

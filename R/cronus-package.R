@@ -2,18 +2,17 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @import rlang
 #' @importFrom cdlTools getCDL
-#' @importFrom glue glue
 #' @importFrom grDevices dev.off
 #' @importFrom grDevices pdf
-#' @importFrom lifecycle deprecated
 #' @importFrom methods new
 #' @importFrom rnassqs nassqs
 #' @importFrom rnassqs nassqs_auth
 #' @importFrom rprojroot find_rstudio_root_file
 #' @importFrom stats start
 #' @importFrom stats weighted.mean
+#' @importFrom tigris counties
+#' @importFrom tigris states
 #' @importFrom utils data
 #' @importFrom utils read.csv
 #' @importFrom utils read.table

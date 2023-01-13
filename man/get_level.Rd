@@ -34,13 +34,12 @@ get_product(x)
 }
 \value{
 \itemize{
-\item \code{get_level} returns a character, the level name of the structured database.
-\item \code{is_x} returns a logical. It answers the question "Is name a x?"
-\item \code{get_x} returns a character, the name of the object's x.
+\item \code{get_level()} returns a character, the level name of the structured database.
+\item \code{is_x()} returns a logical. It answers the question "Is name a x?"
+\item \code{get_x()} returns a character, the name of the object's x.
 }
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Helper functions concerning the database structure.
 }
 \examples{

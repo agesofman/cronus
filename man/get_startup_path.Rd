@@ -25,7 +25,7 @@ add_startup_line(newline, oldline = newline, level = "user", type = "environ")
 \item{newline}{character. Line to add in the file.}
 }
 \description{
-.Rrofile and .Renviron are files loaded at the start-up of each
+.Rprofile and .Renviron are files loaded at the start-up of each
 R session. They can be modified to contain code and variables respectively,
 so that users do not have to explicitly execute the same commands every
 single time. These functions can help the users edit .Rprofile and .Renviron
@@ -59,14 +59,14 @@ Sys.getenv("R_PROFILE")
 file.path(Sys.getenv("R_HOME"), "etc", "Rprofile.site")
 Sys.getenv("R_PROFILE_USER")
 file.path(getwd(), ".Rprofile")
-file.path(Sys.getenv("HOME"), ".Rprofile") # this is selected by 'level = user'.
+file.path(Sys.getenv("HOME"), ".Rprofile") # 'level = user'.
 
 # Locations of .Renviron files in loading order
 Sys.getenv("R_ENVIRON")
 file.path(Sys.getenv("R_HOME"), "etc", "Renviron.site")
 Sys.getenv("R_ENVIRON_USER")
 file.path(getwd(), ".Renviron")
-file.path(Sys.getenv("HOME"), ".Renviron") # this is selected by 'level = user'.
+file.path(Sys.getenv("HOME"), ".Renviron") # 'level = user'.
 
 # Get the path
 level <- "user"
@@ -78,7 +78,7 @@ newline1 <- "my_variable=1"
 newline2 <- "my_variable=2"
 add_startup_line(newline1, level = level, type = type)
 file_startup_1 <- read_startup(level = level, type = type)
-add_startup_line(newline2, oldline = 'my_variable=', level = level, type = type)
+add_startup_line(newline2, oldline = 'my_variable=', level, type)
 file_startup_2 <- read_startup(level = level, type = type)
 
 # Use the package usethis to edit the files directly

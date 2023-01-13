@@ -33,7 +33,6 @@ in the cronus database. For lightweight data (such as variables of the
 Quickstats product), the downloaded data are returned.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Download agricultural, environmental, or satellite data for a region and time
 of interest.
 }

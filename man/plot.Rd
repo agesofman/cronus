@@ -64,7 +64,6 @@ plot(x, y, ...)
 A plot, created either with \code{ggplot2} or with \code{terra}.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 Create a plot of the data stored in the database.
 }
 \examples{

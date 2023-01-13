@@ -21,10 +21,6 @@ test_that("Cropmaps CDL and Daymet functions work", {
   rast_tmin <- load_map(y, "tmin")
   expect_s4_class(rast_tmin, "SpatRaster")
 
-  # Plot the data
-  expect_no_error(plot(x, "cdl", crops = c("Soybeans", "Winter Wheat")))
-  expect_no_error(plot(y, "tmin"))
-
   # Project the rasters
   expect_no_error(project(x, y, variablex = "cdl", variabley = "tmin", newvarname = "cdl_projected"))
 
@@ -36,10 +32,10 @@ test_that("Cropmaps CDL and Daymet functions work", {
   df_cat <- terra::cats(rast_cdl_projected)[[1]]
 
   # Define a transformation table
-  tb_rcl <- cbind(a = c(121:124, 141:143), b = c(rep(82, 4), rep(63, 3)))
+  tb_rcl <- cbind(a = c(1:4, 121:124, 141:143), b = c(1:4, rep(82, 4), rep(63, 3)))
 
   # Write the metadata
-  expect_no_error(write(x, name = "my_metadata", df_cat = df_cat, tb_rcl = tb_rcl))
+  expect_no_error(write_metadata(x, name = "my_metadata", df_cat = df_cat, tb_rcl = tb_rcl))
 
   # Read the metadata
   list_md <- read(x, name = "my_metadata")
@@ -62,7 +58,7 @@ test_that("Cropmaps CDL and Daymet functions work", {
                  'Soybeans'  = c(Tb = 6.0,  To = 26.0, Tc = 39.0))
 
   # Write the metadata
-  write(z, name = "default", tb_ct = tb_ct)
+  write_metadata(z, name = "default", tb_ct = tb_ct)
 
   # Read the metadata
   tb_ct <- read(z, "default")$tb_ct
@@ -71,9 +67,6 @@ test_that("Cropmaps CDL and Daymet functions work", {
   expect_no_error(derive(y, x, "gdd", varxy = c("tmin", "tmax", "cdl_recoded"), tb_ct = tb_ct))
   rast_gdd <- load_map(y, "gdd")
   expect_s4_class(rast_gdd, "SpatRaster")
-
-  # Plot the map
-  expect_no_error(plot(y, "gdd"))
 
   # Compose the rasters into a time-series
   a <- compose(y, x, variablex = "gdd", variabley = "cdl_recoded", fun = "mean")

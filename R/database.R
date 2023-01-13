@@ -5,10 +5,10 @@
 
 #' Provider service
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Get the service that keeps the satellite data stored in order to access the data.
 #'
-#' @param provider character. A provider of interest
+#' @param provider character. A provider of interest.
 #'
 #' @return character. The name of the corresponding service.
 #'
@@ -31,16 +31,16 @@ get_service <- function(provider) {
 
 #' Manage database
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' Helper functions concerning the database structure.
 #'
 #' @param name character. A class name of interest.
-#' @param x S4 object. An object of a class defined in \code{cronus}.
+#' @param x S4 object. An object of a class defined in `cronus`.
 #'
 #' @return
-#'  - \code{get_level} returns a character, the level name of the structured database.
-#'  - \code{is_x} returns a logical. It answers the question "Is name a x?"
-#'  - \code{get_x} returns a character, the name of the object's x.
+#'  - `get_level()` returns a character, the level name of the structured database.
+#'  - `is_x()` returns a logical. It answers the question "Is name a x?"
+#'  - `get_x()` returns a character, the name of the object's x.
 #'
 #' @export
 #'
@@ -122,7 +122,7 @@ get_product <- function(x) {
 
 #' @title Manage database
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #'
 #' Get the relative or absolute path to a branch of the `cronus` database.
 #'
@@ -207,6 +207,7 @@ get_branch <- function(dir = NULL,
 }
 
 #' @rdname get_branch
+#' @export
 create_db <- function(dir = NULL,
                       region = NULL,
                       sector = NULL,

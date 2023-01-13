@@ -5,7 +5,7 @@
 
 #' @title Region class
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' An S4 class that defines a region of interest.
 #'
 #' @slot name character. The name of the region.
@@ -35,7 +35,7 @@ Region <- setClass("Region",
 
 #' Cronus database classes
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' cronus creates a database, which takes the form of a 5-level directory. These
 #' levels are Region > Sector > Provider > Product > Variable. For a specific
 #' region, data can belong to one of three sectors: agricultural, environmental
