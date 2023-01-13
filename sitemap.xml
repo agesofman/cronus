@@ -1,138 +1,147 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://agesofman.github.io/cronus/404.html</loc>
   </url>
   <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
+    <loc>https://agesofman.github.io/cronus/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>/CONTRIBUTING.html</loc>
+    <loc>https://agesofman.github.io/cronus/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://agesofman.github.io/cronus/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/SUPPORT.html</loc>
+    <loc>https://agesofman.github.io/cronus/SUPPORT.html</loc>
   </url>
   <url>
-    <loc>/articles/Data.html</loc>
+    <loc>https://agesofman.github.io/cronus/articles/Data.html</loc>
   </url>
   <url>
-    <loc>/articles/Download.html</loc>
+    <loc>https://agesofman.github.io/cronus/articles/Examples.html</loc>
   </url>
   <url>
-    <loc>/articles/Process.html</loc>
+    <loc>https://agesofman.github.io/cronus/articles/cronus.html</loc>
   </url>
   <url>
-    <loc>/articles/cronus.html</loc>
+    <loc>https://agesofman.github.io/cronus/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://agesofman.github.io/cronus/authors.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://agesofman.github.io/cronus/index.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://agesofman.github.io/cronus/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/Database-class.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/Database-class.html</loc>
   </url>
   <url>
-    <loc>/reference/Region-class.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/Region-class.html</loc>
   </url>
   <url>
-    <loc>/reference/cloudmask.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/cloudmask.html</loc>
   </url>
   <url>
-    <loc>/reference/compose.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/compose.html</loc>
   </url>
   <url>
-    <loc>/reference/create_keyring.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/create_keyring.html</loc>
   </url>
   <url>
-    <loc>/reference/create_rtoi.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/create_rtoi.html</loc>
   </url>
   <url>
-    <loc>/reference/cronus-package.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/cronus-package.html</loc>
   </url>
   <url>
-    <loc>/reference/derive.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/derive.html</loc>
   </url>
   <url>
-    <loc>/reference/download.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/download.html</loc>
   </url>
   <url>
-    <loc>/reference/fillgaps.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/dtri.html</loc>
   </url>
   <url>
-    <loc>/reference/gdd.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/fillgaps.html</loc>
   </url>
   <url>
-    <loc>/reference/get_branch.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/gdd.html</loc>
   </url>
   <url>
-    <loc>/reference/get_files.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/get_branch.html</loc>
   </url>
   <url>
-    <loc>/reference/get_level.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/get_files.html</loc>
   </url>
   <url>
-    <loc>/reference/get_roi.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/get_level.html</loc>
   </url>
   <url>
-    <loc>/reference/get_service.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/get_roi.html</loc>
   </url>
   <url>
-    <loc>/reference/get_toi.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/get_service.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/get_startup_path.html</loc>
   </url>
   <url>
-    <loc>/reference/load_map.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/get_toi.html</loc>
   </url>
   <url>
-    <loc>/reference/mask.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/ndvi.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/load_map.html</loc>
   </url>
   <url>
-    <loc>/reference/pipe.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/mask.html</loc>
   </url>
   <url>
-    <loc>/reference/plot.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/ndvi.html</loc>
   </url>
   <url>
-    <loc>/reference/project.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>/reference/read.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/plot.html</loc>
   </url>
   <url>
-    <loc>/reference/recode.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/project.html</loc>
   </url>
   <url>
-    <loc>/reference/rename_crops.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/read.html</loc>
   </url>
   <url>
-    <loc>/reference/smoothout.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/recode.html</loc>
   </url>
   <url>
-    <loc>/reference/summarize.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/rename_crops.html</loc>
   </url>
   <url>
-    <loc>/reference/tidy_progress.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/set_path_demeter.html</loc>
   </url>
   <url>
-    <loc>/reference/trunc_minmax.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/smoothout.html</loc>
   </url>
   <url>
-    <loc>/reference/write_metadata.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/summarize.html</loc>
   </url>
   <url>
-    <loc>/reference/wt1.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/tidy_progress.html</loc>
+  </url>
+  <url>
+    <loc>https://agesofman.github.io/cronus/reference/trunc_minmax.html</loc>
+  </url>
+  <url>
+    <loc>https://agesofman.github.io/cronus/reference/write_metadata.html</loc>
+  </url>
+  <url>
+    <loc>https://agesofman.github.io/cronus/reference/wt1.html</loc>
   </url>
 </urlset>
