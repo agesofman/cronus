@@ -19,7 +19,9 @@ output: github_document
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/cronus)](https://CRAN.R-project.org/package=cronus)
 [![R-CMD-check](https://github.com/agesofman/cronus/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/agesofman/cronus/actions/workflows/R-CMD-check.yaml)
-[![codecov](https://codecov.io/gh/agesofman/cronus/branch/main/graph/badge.svg?token=HCS4JG9EL7)](https://codecov.io/gh/agesofman/cronus)
+[![codecov](https://codecov.io/gh/agesofman/cronus/branch/main/graph/badge.svg)](https://codecov.io/gh/agesofman/cronus)
+
+
 <!-- badges: end -->
 
 ## Introduction
