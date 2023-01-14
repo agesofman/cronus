@@ -8,8 +8,8 @@
 [![CRAN
 status](https://www.r-pkg.org/badges/version/cronus)](https://CRAN.R-project.org/package=cronus)
 [![R-CMD-check](https://github.com/agesofman/cronus/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/agesofman/cronus/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/agesofman/cronus/branch/master/graph/badge.svg)](https://app.codecov.io/gh/agesofman/cronus?branch=master)
+[![codecov](https://codecov.io/gh/agesofman/cronus/branch/main/graph/badge.svg)](https://codecov.io/gh/agesofman/cronus)
+
 <!-- badges: end -->
 
 ## Introduction
@@ -18,21 +18,21 @@ The *Ages of Man* project applies advanced statistical methodology on
 remote sensing agriculture. It is composed of several R packages, as
 well as other elements, each one focusing on a different application.
 
-*cronus* is an R package that focuses on database creation. It can be
-used to download and process agricultural, environmental and satellite
-data from various sources.
+cronus is an R package that focuses on database creation. It can be used
+to download and process agricultural, environmental and satellite data
+from various sources.
 
 ## Installation
 
-You can install the stable version of *cronus* from CRAN by running the
+You can install the stable version of cronus from CRAN by running the
 following line of code:
 
 ``` r
  install.packages("cronus")
 ```
 
-You can install the development version of *cronus* from github by
-running the following line of code:
+You can install the development version of cronus from github by running
+the following line of code:
 
 ``` r
  devtools::install_github("agesofman/cronus")
@@ -50,8 +50,7 @@ in the package vignettes.
 ``` r
 vignette(topic = "cronus", package = "cronus")
 vignette(topic = "Data", package = "cronus")
-vignette(topic = "Download", package = "cronus")
-vignette(topic = "Process", package = "cronus")
+vignette(topic = "Examples", package = "cronus")
 ```
 
 ## Team
