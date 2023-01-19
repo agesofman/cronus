@@ -11,15 +11,14 @@
 #' single time. These functions can help the users edit .Rprofile and .Renviron
 #' files without actually opening them.
 #'
-#' @param level character. The level of file, one of 'user' or 'project'.
 #' @param type character. The type, one of 'environ' or 'profile'.
 #' @param newline character. Line to add in the file.
 #' @param oldline character. Line to remove before adding the new one.
 #'
 #' @details There are multiple locations in which .Rprofile and .Renviron files
-#' are stored. This function can only modify the 'user' and the 'project' files.
-#' Here, 'project' refers to an RStudio project. The examples show all possible
-#' locations of the startup files. See also \link[base]{Startup}.
+#' are stored. This function can only modify the 'user' files. The examples
+#' show all possible locations of the startup files. See also
+#' \link[base]{Startup}.
 #'
 #' Argument `oldline` is used to remove duplicate lines of code. It can be
 #' specified as a regex to look for complex code expressions and remove them.
@@ -27,11 +26,9 @@
 #'
 #' @describeIn get_startup_path Returns the .Renviron or .Rprofile file path.
 #'
-#' @importFrom rprojroot find_rstudio_root_file
 #' @export
 #'
-#' @seealso [base::Startup], [base::options()],
-#' [rprojroot::find_rstudio_root_file()], [cronus::set_path_demeter()]
+#' @seealso [base::Startup], [base::options()], [cronus::set_path_demeter()]
 #'
 #' @examples
 #' \dontrun{
@@ -40,51 +37,38 @@
 #' file.path(Sys.getenv("R_HOME"), "etc", "Rprofile.site")
 #' Sys.getenv("R_PROFILE_USER")
 #' file.path(getwd(), ".Rprofile")
-#' file.path(Sys.getenv("HOME"), ".Rprofile") # 'level = user'.
+#' file.path(Sys.getenv("HOME"), ".Rprofile") # 'user' file
 #'
 #' # Locations of .Renviron files in loading order
 #' Sys.getenv("R_ENVIRON")
 #' file.path(Sys.getenv("R_HOME"), "etc", "Renviron.site")
 #' Sys.getenv("R_ENVIRON_USER")
 #' file.path(getwd(), ".Renviron")
-#' file.path(Sys.getenv("HOME"), ".Renviron") # 'level = user'.
+#' file.path(Sys.getenv("HOME"), ".Renviron") # 'user' file
 #'
 #' # Get the path
-#' level <- "user"
 #' type <- "environ"
-#' get_startup_path(level = level, type = type)
+#' get_startup_path(type = type)
 #'
 #' # Edit the file
 #' newline1 <- "my_variable=1"
 #' newline2 <- "my_variable=2"
-#' add_startup_line(newline1, level = level, type = type)
-#' file_startup_1 <- read_startup(level = level, type = type)
-#' add_startup_line(newline2, oldline = 'my_variable=', level, type)
-#' file_startup_2 <- read_startup(level = level, type = type)
+#' add_startup_line(newline1, type = type)
+#' file_startup_1 <- read_startup(type)
+#' add_startup_line(newline2, oldline = 'my_variable=', type = type)
+#' file_startup_2 <- read_startup(type)
 #'
 #' # Use the package usethis to edit the files directly
 #' library(usethis)
 #' edit_r_profile(scope = "user")
 #' edit_r_environ(scope = "user")
 #' }
-get_startup_path <- function(level, type = "environ") {
+get_startup_path <- function(type = "environ") {
 
   if (type == "environ") {
-    if (level == "user") {
-      file.path(Sys.getenv("HOME"), ".Renviron")
-    } else if (level == "project") {
-      file.path(rprojroot::find_rstudio_root_file(), ".Renviron")
-    } else {
-      stop("level should be one of 'user' or 'project', got ", level)
-    }
+    file.path(Sys.getenv("HOME"), ".Renviron")
   } else if (type == "profile") {
-    if (level == "user") {
-      file.path(Sys.getenv("HOME"), ".Rprofile")
-    } else if (level == "project") {
-      file.path(rprojroot::find_rstudio_root_file(), ".Rprofile")
-    } else {
-      stop("level should be one of 'user' or 'project', got ", level)
-    }
+    file.path(Sys.getenv("HOME"), ".Rprofile")
   } else {
     stop("type should be one of 'environ' or 'profile', got ", type)
   }
@@ -93,10 +77,10 @@ get_startup_path <- function(level, type = "environ") {
 
 #' @describeIn get_startup_path Read the .Renviron or .Rprofile file.
 #' @export
-read_startup <- function(level = "user", type = "environ") {
+read_startup <- function(type = "environ") {
 
   # Get path
-  path_startup <- get_startup_path(level, type)
+  path_startup <- get_startup_path(type)
 
   # Create file if it does not exist
   if (!file.exists(path_startup)) {
@@ -110,13 +94,13 @@ read_startup <- function(level = "user", type = "environ") {
 
 #' @describeIn get_startup_path Remove a line of code from the .Renviron or .Rprofile file.
 #' @export
-remove_startup_line <- function(oldline, level = "user", type = "environ") {
+remove_startup_line <- function(oldline, type = "environ") {
 
   # Get path
-  path_startup <- get_startup_path(level, type)
+  path_startup <- get_startup_path(type)
 
   # Read Rprofile
-  file_startup <- read_startup(level)
+  file_startup <- read_startup(type)
 
   # Add line
   oldline_index <- grep(oldline, file_startup)
@@ -131,16 +115,16 @@ remove_startup_line <- function(oldline, level = "user", type = "environ") {
 
 #' @describeIn get_startup_path Add a line of code from the .Renviron or .Rprofile file.
 #' @export
-add_startup_line <- function(newline, oldline = newline, level = "user", type = "environ") {
+add_startup_line <- function(newline, oldline = newline, type = "environ") {
 
   # Get profile path
-  path_startup <- get_startup_path(level, type)
+  path_startup <- get_startup_path(type)
 
   # Remove in case of duplicates
-  remove_startup_line(oldline, level)
+  remove_startup_line(oldline, type)
 
   # Read Rprofile
-  file_startup <- read_startup(level)
+  file_startup <- read_startup(type)
 
   # Add line
   file_startup <- c(file_startup, newline)
@@ -156,7 +140,6 @@ add_startup_line <- function(newline, oldline = newline, level = "user", type = 
 #' file.
 #'
 #' @param path character. The path to the database directory.
-#' @param level character. The level of profile, one of 'user' or 'project'.
 #'
 #' @return nothing. The .Renviron file is edited.
 #' @export
@@ -165,17 +148,19 @@ add_startup_line <- function(newline, oldline = newline, level = "user", type = 
 #'
 #' @examples
 #' \dontrun{
-#' set_path_demeter(getwd(), level = "user")
+#' set_path_demeter(getwd())
 #' get_path_demeter()
 #' }
-set_path_demeter <- function(path, level = "user") {
+set_path_demeter <- function(path) {
   newline <- paste0("path_demeter='", path, "'")
   oldline <- "path_demeter="
-  add_startup_line(newline, oldline = oldline, level = level, type = "environ")
+  add_startup_line(newline, oldline = oldline, type = "environ")
 }
 
 #' @rdname set_path_demeter
 #' @export
 get_path_demeter <- function() {
-  Sys.getenv("path_demeter")
+  path_demeter <- NULL
+  source(get_startup_path(type = "environ"), local = TRUE)
+  path_demeter
 }

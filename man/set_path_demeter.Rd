@@ -5,14 +5,12 @@
 \alias{get_path_demeter}
 \title{Set Demeter path}
 \usage{
-set_path_demeter(path, level = "user")
+set_path_demeter(path)
 
 get_path_demeter()
 }
 \arguments{
 \item{path}{character. The path to the database directory.}
-
-\item{level}{character. The level of profile, one of 'user' or 'project'.}
 }
 \value{
 nothing. The .Renviron file is edited.
@@ -23,7 +21,7 @@ file.
 }
 \examples{
 \dontrun{
-set_path_demeter(getwd(), level = "user")
+set_path_demeter(getwd())
 get_path_demeter()
 }
 }

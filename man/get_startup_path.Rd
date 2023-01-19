@@ -7,17 +7,15 @@
 \alias{add_startup_line}
 \title{Handle .Rprofile and .Renviron}
 \usage{
-get_startup_path(level, type = "environ")
+get_startup_path(type = "environ")
 
-read_startup(level = "user", type = "environ")
+read_startup(type = "environ")
 
-remove_startup_line(oldline, level = "user", type = "environ")
+remove_startup_line(oldline, type = "environ")
 
-add_startup_line(newline, oldline = newline, level = "user", type = "environ")
+add_startup_line(newline, oldline = newline, type = "environ")
 }
 \arguments{
-\item{level}{character. The level of file, one of 'user' or 'project'.}
-
 \item{type}{character. The type, one of 'environ' or 'profile'.}
 
 \item{oldline}{character. Line to remove before adding the new one.}
@@ -33,9 +31,9 @@ files without actually opening them.
 }
 \details{
 There are multiple locations in which .Rprofile and .Renviron files
-are stored. This function can only modify the 'user' and the 'project' files.
-Here, 'project' refers to an RStudio project. The examples show all possible
-locations of the startup files. See also \link[base]{Startup}.
+are stored. This function can only modify the 'user' files. The examples
+show all possible locations of the startup files. See also
+\link[base]{Startup}.
 
 Argument \code{oldline} is used to remove duplicate lines of code. It can be
 specified as a regex to look for complex code expressions and remove them.
@@ -59,27 +57,26 @@ Sys.getenv("R_PROFILE")
 file.path(Sys.getenv("R_HOME"), "etc", "Rprofile.site")
 Sys.getenv("R_PROFILE_USER")
 file.path(getwd(), ".Rprofile")
-file.path(Sys.getenv("HOME"), ".Rprofile") # 'level = user'.
+file.path(Sys.getenv("HOME"), ".Rprofile") # 'user' file
 
 # Locations of .Renviron files in loading order
 Sys.getenv("R_ENVIRON")
 file.path(Sys.getenv("R_HOME"), "etc", "Renviron.site")
 Sys.getenv("R_ENVIRON_USER")
 file.path(getwd(), ".Renviron")
-file.path(Sys.getenv("HOME"), ".Renviron") # 'level = user'.
+file.path(Sys.getenv("HOME"), ".Renviron") # 'user' file
 
 # Get the path
-level <- "user"
 type <- "environ"
-get_startup_path(level = level, type = type)
+get_startup_path(type = type)
 
 # Edit the file
 newline1 <- "my_variable=1"
 newline2 <- "my_variable=2"
-add_startup_line(newline1, level = level, type = type)
-file_startup_1 <- read_startup(level = level, type = type)
-add_startup_line(newline2, oldline = 'my_variable=', level, type)
-file_startup_2 <- read_startup(level = level, type = type)
+add_startup_line(newline1, type = type)
+file_startup_1 <- read_startup(type)
+add_startup_line(newline2, oldline = 'my_variable=', type = type)
+file_startup_2 <- read_startup(type)
 
 # Use the package usethis to edit the files directly
 library(usethis)
@@ -88,6 +85,5 @@ edit_r_environ(scope = "user")
 }
 }
 \seealso{
-\link[base:Startup]{base::Startup}, \code{\link[base:options]{base::options()}},
-\code{\link[rprojroot:find_root_file]{rprojroot::find_rstudio_root_file()}}, \code{\link[=set_path_demeter]{set_path_demeter()}}
+\link[base:Startup]{base::Startup}, \code{\link[base:options]{base::options()}}, \code{\link[=set_path_demeter]{set_path_demeter()}}
 }

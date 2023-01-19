@@ -1,13 +1,13 @@
 Package: cronus
 Title: Agricultural Remote Sensing Database Constructor
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: c(
     person(given = "Ioannis", family = "Oikonomidis",
            email = "goikon@math.uoa.gr", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8130-2104")),
     person(given = "Samis", family = "Trevezas",
            email = "strevezas@math.uoa.gr", role = c("aut", "ths")))
-Description: cronus is an R package that focuses on database creation. It
+Description: An R package that focuses on database creation. It
     can be used to download and process agricultural, environmental and
     satellite data from various sources.
 Language: en-US

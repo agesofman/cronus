@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-cronus is an R package that focuses on database creation. It can be used to download and process agricultural, environmental and satellite data from various sources.
+An R package that focuses on database creation. It can be used to download and process agricultural, environmental and satellite data from various sources.
 }
 \seealso{
 Useful links:
