@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cronus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,20 +93,12 @@
     
     
 <div class="section level2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The <em>Ages of Man</em> project applies advanced statistical
-methodology on remote sensing agriculture. It is composed of several R
-packages, as well as other elements, each one focusing on a different
-application.</p>
-<p>cronus is an R package that focuses on database creation. It can be
-used to download and process agricultural, environmental and satellite
-data from various sources. This vignette contains general information on
-the package.</p>
-</div>
-<div class="section level2">
-<h2 id="understanding-the-package-in-5-minutes">Understanding the package in 5 minutes<a class="anchor" aria-label="anchor" href="#understanding-the-package-in-5-minutes"></a>
-</h2>
+<p>This vignette contains general information on the package. It is
+intended to give the user a general picture of the package features,
+presenting the database structure and the code architecture in a clear
+and concise way.</p>
 <div class="section level3">
 <h3 id="database-structure">Database structure<a class="anchor" aria-label="anchor" href="#database-structure"></a>
 </h3>
@@ -158,7 +150,7 @@ check <code><a href="../reference/Database-class.html">?cronus::'Database-class'
 <code><a href="../articles/Data.html">vignette("Data")</a></code>.</p>
 </div>
 <div class="section level3">
-<h3 id="code-structure">Code structure<a class="anchor" aria-label="anchor" href="#code-structure"></a>
+<h3 id="code-architecture">Code architecture<a class="anchor" aria-label="anchor" href="#code-architecture"></a>
 </h3>
 <p>The package is built using the S4 class system, offering simplicity
 to new R users as well as ease of development to the project core team.
@@ -213,13 +205,13 @@ well as the estimated time remaining.</p>
 </h3>
 <p>In order to avoid specifying the database directory in every single
 function call, a variable named <code>path_demeter</code> can be added
-to the environment variables, stored in the user or project .Renviron
-file. This allows the user to specify only once the database directory,
-which will load in the beginning of every R session. Function
+to the environment variables, stored in the user .Renviron file. This
+allows the user to specify only once the database directory, which will
+load in the beginning of every R session. Function
 <code><a href="../reference/set_path_demeter.html">set_path_demeter()</a></code> can be used to specify or change the
 path.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/set_path_demeter.html">set_path_demeter</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>, level <span class="op">=</span> <span class="st">"user"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/set_path_demeter.html">set_path_demeter</a></span><span class="op">(</span>path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="safety-and-keyrings">Safety and Keyrings<a class="anchor" aria-label="anchor" href="#safety-and-keyrings"></a>
