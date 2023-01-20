@@ -8,7 +8,6 @@
 #' @importFrom methods new
 #' @importFrom rnassqs nassqs
 #' @importFrom rnassqs nassqs_auth
-#' @importFrom rprojroot find_rstudio_root_file
 #' @importFrom stats start
 #' @importFrom stats weighted.mean
 #' @importFrom tigris counties

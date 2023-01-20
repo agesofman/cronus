@@ -28,7 +28,6 @@ Imports:
     progress,
     ptw,
     rnassqs,
-    rprojroot,
     rsat,
     stats,
     stringr,
