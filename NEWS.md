@@ -1,3 +1,7 @@
+# cronus 0.0.5
+
+* Removed `rprojroot` dependency.
+
 # cronus 0.0.4
 
 * Fixed a bug in `download()` that resulted in cdl rasters not recognized as categorical.

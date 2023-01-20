@@ -1,6 +1,6 @@
 Package: cronus
 Title: Agricultural Remote Sensing Database Constructor
-Version: 0.0.4
+Version: 0.0.5
 Authors@R: c(
     person(given = "Ioannis", family = "Oikonomidis",
            email = "goikon@math.uoa.gr", role = c("aut", "cre"),
