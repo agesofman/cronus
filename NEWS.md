@@ -1,3 +1,7 @@
+# cronus 0.0.6
+
+* Fixed bug in default `dir` slot of the `Database` class.
+
 # cronus 0.0.5
 
 * Removed `rprojroot` dependency.

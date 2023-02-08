@@ -98,7 +98,7 @@ Database <- setClass("Database",
                                   date = "Date",
                                   dir = "character"),
                      prototype = list(date = as.Date(""),
-                                      dir = Sys.getenv("path_demeter")))
+                                      dir = get_path_demeter()))
 
 #' @rdname Database-class
 Sector <- setClass("Sector", contains = "Database")
