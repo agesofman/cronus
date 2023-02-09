@@ -160,7 +160,10 @@ set_path_demeter <- function(path) {
 #' @rdname set_path_demeter
 #' @export
 get_path_demeter <- function() {
+  path_renviron <- cronus::get_startup_path(type = "environ")
   path_demeter <- NULL
-  source(get_startup_path(type = "environ"), local = TRUE)
+  if (file.exists(path_renviron)) {
+    source(path_renviron, local = TRUE)
+  }
   path_demeter
 }

@@ -1,3 +1,7 @@
+# cronus 0.0.7
+
+* Fixed bug in `get_path_demeter()`.
+
 # cronus 0.0.6
 
 * Fixed bug in default `dir` slot of the `Database` class.
