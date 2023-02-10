@@ -1,3 +1,7 @@
+# cronus 0.0.10
+
+* Deleted CRAN files.
+
 # cronus 0.0.9
 
 * Changed github R-CMD-check workflows.
