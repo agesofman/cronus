@@ -12,7 +12,7 @@ test_that(".Renviron editing functions work", {
   file_startup <- read_startup(type)
 
   # Add line to file
-  add_startup_line(newline1, type)
+  add_startup_line(newline1, type = type)
   file_startup_1 <- read_startup(type)
 
   # Add line to file
@@ -45,15 +45,15 @@ test_that(".Rprofile editing functions work", {
   file_startup <- read_startup(type)
 
   # Add line to file
-  add_startup_line(newline1, type)
+  add_startup_line(newline1, type = type)
   file_startup_1 <- read_startup(type)
 
   # Add line to file
-  add_startup_line(newline2, type)
+  add_startup_line(newline2, oldline = 'my_variable=', type)
   file_startup_2 <- read_startup(type)
 
   # Add same line to file
-  add_startup_line(newline1, type)
+  add_startup_line(newline1, oldline = 'my_variable=', type)
   file_startup_3 <- read_startup(type)
 
   # TEST: Expect that the two files are identical

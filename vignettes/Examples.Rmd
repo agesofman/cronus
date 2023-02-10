@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 This vignette holds a collection of examples that illustrate the package capabilities. The examples assume that the user has created a keyring and set the default `path_demeter`. See the *Additional Information* section in `vignette("cronus")`. 
 
-```{r setup}
+```{r setup, eval = FALSE}
 library(cronus)
 
 region <- Region(name = "nebraska", type = "us state",

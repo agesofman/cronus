@@ -46,7 +46,7 @@ The package is built using the S4 class system, offering simplicity to new R use
 
 Now, it is straightforward to create any data object:
 
-```{r}
+```{r eval = FALSE}
 region <- Region(name = "nebraska", type = "us state", div = c(country = "United States", state = "Nebraska"))
 date <- as.Date("2020-07-15")
 dir <- getwd()
@@ -79,7 +79,7 @@ You are now ready to read `vignette("Examples")`.
 
 In order to avoid specifying the database directory in every single function call, a variable named `path_demeter` can be added to the environment variables, stored in the user .Renviron file. This allows the user to specify only once the database directory, which will load in the beginning of every R session. Function `set_path_demeter()` can be used to specify or change the path.
 
-```{r}
+```{r eval = FALSE}
 set_path_demeter(path = getwd())
 ```
 
@@ -95,7 +95,7 @@ the user needs to have an credentials for the following services:
 
 In order to safely store API keys and passwords, the R package `keyring` is used. You can always store your credentials in another safe place, just make sure they are *not* made publicly available by mistake. A keyring is an account that can hold keys (credentials) for various services. Once a keyring is created, the user can start adding keys to it. The following example shows how to create a keyring and store credentials.
 
-```{r, eval = FALSE}
+```{r eval = FALSE}
  ringname <- "my_ringname"
  password <- "my_password"
 
