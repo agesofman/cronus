@@ -1,3 +1,7 @@
+# cronus 0.0.9
+
+* Changed github R-CMD-check workflows.
+
 # cronus 0.0.8
 
 * Fixed bug in vignettes.
