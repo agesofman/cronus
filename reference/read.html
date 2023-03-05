@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cronus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,6 +29,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Data.html">Data</a>
     <a class="dropdown-item" href="../articles/Examples.html">Examples</a>
+    <a class="dropdown-item" href="../articles/hermes.html">hermes</a>
   </div>
 </li>
 <li class="nav-item">
@@ -64,7 +65,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for Quickstats</span></span>
-<span><span class="fu">read</span><span class="op">(</span><span class="va">x</span>, <span class="va">variable</span><span class="op">)</span></span>
+<span><span class="fu">read</span><span class="op">(</span><span class="va">x</span>, <span class="va">variable</span>, predictors <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for Cropmaps</span></span>
 <span><span class="fu">read</span><span class="op">(</span><span class="va">x</span>, <span class="va">name</span><span class="op">)</span></span>
@@ -76,10 +77,7 @@
 <span><span class="fu">read</span><span class="op">(</span><span class="va">x</span>, <span class="va">variable</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S4 method for Mod09ga</span></span>
-<span><span class="fu">read</span><span class="op">(</span><span class="va">x</span>, <span class="va">variable</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># S4 method for Database</span></span>
-<span><span class="fu">read</span><span class="op">(</span><span class="va">x</span>, <span class="va">df_var</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">read</span><span class="op">(</span><span class="va">x</span>, <span class="va">variable</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -96,12 +94,12 @@
 <dd><p>character. The variable of interest.</p></dd>
 
 
+<dt>predictors</dt>
+<dd><p>data.frame. A data frame with columns Product and Variable.</p></dd>
+
+
 <dt>name</dt>
 <dd><p>character. The name of the metadata files.</p></dd>
-
-
-<dt>df_var</dt>
-<dd><p>data.frame. A data frame with columns Product and Variable.</p></dd>
 
 </dl></div>
     <div class="section level2">

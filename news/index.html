@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cronus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,6 +29,7 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Data.html">Data</a>
     <a class="dropdown-item" href="../articles/Examples.html">Examples</a>
+    <a class="dropdown-item" href="../articles/hermes.html">hermes</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -54,6 +55,19 @@
       <small>Source: <a href="https://github.com/agesofman/cronus/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.0" id="cronus-010">cronus 0.1.0<a class="anchor" aria-label="anchor" href="#cronus-010"></a></h2>
+<ul><li>Variables now have their own S3 classes.</li>
+<li>Created <code>Progress</code> and <code>ProgressList</code> classes.</li>
+<li>Database functions <code>get_*()</code> are now exported.</li>
+<li>Function <code>tidy_progress()</code> was renamed to <code><a href="../reference/tidy_Qs_progress.html">tidy_Qs_progress()</a></code>.</li>
+<li>A <code><a href="../reference/mutate.html">mutate()</a></code> function was added for <code>Progress</code>, <code>ProgressList</code>.</li>
+<li>Function <code>calc_percentage()</code> is now divided in <code>cal_perc()</code> and <code><a href="../reference/tidy_Qs_progress.html">calc_cumperc()</a></code>.</li>
+<li>Removed lifecycle badge from roi.</li>
+<li>Method <code>Database</code> for function <code><a href="../reference/read.html">read()</a></code> was replaced by the <code>Progress</code> method.</li>
+<li>Function <code><a href="../reference/combine.html">combine()</a></code> was moved from <code>agesofman</code> to <code>cronus</code>.</li>
+<li>Function <code>get_combinations()</code> was moved from <code>persephone</code> to <code>cronus</code> and renamed to <code><a href="../reference/combinations.html">combinations()</a></code>.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.10" id="cronus-0010">cronus 0.0.10<a class="anchor" aria-label="anchor" href="#cronus-0010"></a></h2>
 <ul><li>Deleted CRAN files.</li>

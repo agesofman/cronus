@@ -25,6 +25,9 @@
     <loc>https://agesofman.github.io/cronus/articles/cronus.html</loc>
   </url>
   <url>
+    <loc>https://agesofman.github.io/cronus/articles/hermes.html</loc>
+  </url>
+  <url>
     <loc>https://agesofman.github.io/cronus/articles/index.html</loc>
   </url>
   <url>
@@ -46,6 +49,12 @@
     <loc>https://agesofman.github.io/cronus/reference/cloudmask.html</loc>
   </url>
   <url>
+    <loc>https://agesofman.github.io/cronus/reference/combinations.html</loc>
+  </url>
+  <url>
+    <loc>https://agesofman.github.io/cronus/reference/combine.html</loc>
+  </url>
+  <url>
     <loc>https://agesofman.github.io/cronus/reference/compose.html</loc>
   </url>
   <url>
@@ -62,6 +71,9 @@
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/download.html</loc>
+  </url>
+  <url>
+    <loc>https://agesofman.github.io/cronus/reference/download_hermes.html</loc>
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/dtri.html</loc>
@@ -103,19 +115,31 @@
     <loc>https://agesofman.github.io/cronus/reference/mask.html</loc>
   </url>
   <url>
+    <loc>https://agesofman.github.io/cronus/reference/mutate.html</loc>
+  </url>
+  <url>
     <loc>https://agesofman.github.io/cronus/reference/ndvi.html</loc>
+  </url>
+  <url>
+    <loc>https://agesofman.github.io/cronus/reference/new_Progress.html</loc>
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://agesofman.github.io/cronus/reference/plot.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/plot-Cropmaps-character-method.html</loc>
+  </url>
+  <url>
+    <loc>https://agesofman.github.io/cronus/reference/plot-Progress-ANY-method.html</loc>
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/project.html</loc>
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/read.html</loc>
+  </url>
+  <url>
+    <loc>https://agesofman.github.io/cronus/reference/read_exe.html</loc>
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/recode.html</loc>
@@ -127,13 +151,16 @@
     <loc>https://agesofman.github.io/cronus/reference/set_path_demeter.html</loc>
   </url>
   <url>
+    <loc>https://agesofman.github.io/cronus/reference/set_path_hermes.html</loc>
+  </url>
+  <url>
     <loc>https://agesofman.github.io/cronus/reference/smoothout.html</loc>
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/summarize.html</loc>
   </url>
   <url>
-    <loc>https://agesofman.github.io/cronus/reference/tidy_progress.html</loc>
+    <loc>https://agesofman.github.io/cronus/reference/tidy_Qs_progress.html</loc>
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/trunc_minmax.html</loc>

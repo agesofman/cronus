@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="cronus">
-<title>Data • cronus</title>
+<title>hermes • cronus</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Data">
+<meta property="og:title" content="hermes">
 <meta property="og:description" content="cronus">
 <meta property="og:image" content="https://agesofman.github.io/cronus/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -84,116 +84,53 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Data</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>hermes</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/agesofman/cronus/blob/HEAD/vignettes/Data.Rmd" class="external-link"><code>vignettes/Data.Rmd</code></a></small>
-      <div class="d-none name"><code>Data.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/agesofman/cronus/blob/HEAD/vignettes/hermes.Rmd" class="external-link"><code>vignettes/hermes.Rmd</code></a></small>
+      <div class="d-none name"><code>hermes.Rmd</code></div>
     </div>
 
     
     
-<p>This vignette provides a brief summary of the products made available
-from the package, encapsulating useful information about the data. Every
-abstract is taken directly from the product provider official website,
-links for which can be found in the text.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/agesofman/cronus" class="external-link">cronus</a></span><span class="op">)</span></span></code></pre></div>
+<p><em>hermes</em> is an R project that stores files. It includes the
+necessary executable scripts that the <em>Ages of Man</em> core team
+members use in their research, as well as the results (reports, plots
+etc) generated.</p>
 <div class="section level2">
-<h2 id="agricultural-sector">
-<strong>Agricultural Sector</strong><a class="anchor" aria-label="anchor" href="#agricultural-sector"></a>
+<h2 id="download">Download<a class="anchor" aria-label="anchor" href="#download"></a>
 </h2>
-<p>The agricultural sector contains crop data measured on the field or
-reported by the producers. Examples include crop development, biomass
-accumulation and leaf area index.</p>
-<div class="section level3">
-<h3 id="nass">NASS<a class="anchor" aria-label="anchor" href="#nass"></a>
-</h3>
-<p>The National Agricultural Statistics Service (NASS) of the United
-States Department of Agriculture (USDA) conducts hundreds of surveys
-every year and prepares reports covering virtually every aspect of U.S.
-agriculture. Production and supplies of food and fiber, prices paid and
-received by farmers, farm labor and wages, farm finances, chemical use,
-and changes in the demographics of U.S. producers are only a few
-examples. NASS is committed to providing timely, accurate, and useful
-statistics in service to U.S. agriculture. For more information, visit
-the <a href="https://www.nass.usda.gov/" class="external-link">NASS website</a>.</p>
-<div class="section level4">
-<h4 id="quick-stats">Quick Stats<a class="anchor" aria-label="anchor" href="#quick-stats"></a>
-</h4>
-<p>The Quick Stats Database is the most comprehensive tool for accessing
-agricultural data published by the USDA National Agricultural Statistics
-Service (NASS). Quick Stats contains official published aggregate
-estimates related to U.S. agricultural production, available in county,
-state, or country level.</p>
-<p>The data include the total crops and cropping practices for each
-county, and breakouts for irrigated and non-irrigated practices for many
-crops, for selected States. The database allows custom extracts based on
-commodity, year, and selected counties within a State, or all counties
-in one or more States. The county data includes totals for the
-Agricultural Statistics Districts (county groupings) and the State. The
-download data files contain planted and harvested area, yield per acre
-and production.</p>
-<p>NASS develops these estimates from data collected through sample
-surveys conducted each year covering virtually every aspect of U.S.
-agriculture and the Census of Agriculture conducted every five years
-providing state- and county-level aggregates. For more information,
-visit the <a href="https://www.nass.usda.gov/Quick_Stats/" class="external-link">NASS
-website</a>.</p>
-</div>
-<div class="section level4">
-<h4 id="cropland-data-layers">Cropland Data Layers<a class="anchor" aria-label="anchor" href="#cropland-data-layers"></a>
-</h4>
-<p>The National Agricultural Statistical Service (NASS) offers the
-Cropland Data Layers (CDLs), 1km geospatial maps of estimated crop land
-use. For more information, visit the <a href="https://www.nass.usda.gov/Research_and_Science/Cropland/SARS1a.php" class="external-link">NASS
-website</a>.</p>
-</div>
-</div>
+<p>The project can be downloaded from the <a href="https://github.com/agesofman/agesofman" title="hermes github repository" class="external-link">hermes github repository</a>, or with
+the <code><a href="../reference/download_hermes.html">download_hermes()</a></code> function included in the
+<code>agesofman</code> package.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">path_hermes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/download_hermes.html">download_hermes</a></span><span class="op">(</span><span class="va">path_hermes</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="environmental-sector">
-<strong>Environmental Sector</strong><a class="anchor" aria-label="anchor" href="#environmental-sector"></a>
+<h2 id="project-path">Project path<a class="anchor" aria-label="anchor" href="#project-path"></a>
 </h2>
-<p>The environmental sector contains data measured from meteorological
-stations or other devices, as well as statistically-predicted data
-(which may be based on satellite data). Examples include temperature,
-precipitation and soil composition.</p>
-<div class="section level3">
-<h3 id="oak-ridge-national-laboratory">Oak-Ridge National Laboratory<a class="anchor" aria-label="anchor" href="#oak-ridge-national-laboratory"></a>
-</h3>
-<p>Oak Ridge National Laboratory is a multiprogram research laboratory
-managed by UT-Battelle, LLC, for the U.S. Department of Energy (DOE).
-The missions of ORNL are primarily for open research. Although a small
-percentage of ORNL’s work is classified or restricted under its growing
-national security programs, the majority of the laboratory’s work is
-published in the open literature. Many of its facilities are user
-facilities, which means that they are available to researchers from
-other national labs, academia and industry. For more information, visit
-the <a href="https://www.ornl.gov/" class="external-link">ORNL website</a>.</p>
-<div class="section level4">
-<h4 id="daymet">Daymet<a class="anchor" aria-label="anchor" href="#daymet"></a>
-</h4>
-<p>Daymet is a research product of the Environmental Sciences Division
-at Oak Ridge National Laboratory, Oak Ridge, TN. It provides long-term,
-continuous, gridded estimates of daily weather and climatology variables
-by interpolating and extrapolating ground-based observations through
-statistical modeling techniques. Daymet data products provide driver
-data for biogeochemical terrestrial modeling. Daymet weather variables
-include</p>
-<ul>
-<li>minimum temperature,</li>
-<li>maximum temperature,</li>
-<li>precipitation,</li>
-<li>vapor pressure,</li>
-<li>shortwave radiation,</li>
-<li>snow water equivalent, and</li>
-<li>day length</li>
-</ul>
-<p>produced on a 1 km x 1 km gridded surface over continental North
-America and Hawaii from 1980 and over Puerto Rico from 1950 through the
-end of the most recent full calendar year. For more information, visit
-the <a href="https://daymet.ornl.gov/" class="external-link">ORNL website</a>.</p>
+<p>In order to avoid specifying the project path in every single
+function call, a variable named <code>path_hermes</code> can be added to
+the environment variables, stored in the user .Renviron file. This
+allows the user to specify only once the project path, which will load
+in the beginning of every R session. Function
+<code><a href="../reference/set_path_hermes.html">set_path_hermes()</a></code> can be used to specify or change the
+path.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/set_path_hermes.html">set_path_hermes</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">path_hermes</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/set_path_hermes.html">get_path_hermes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
-</div>
+<div class="section level2">
+<h2 id="project-structure">Project structure<a class="anchor" aria-label="anchor" href="#project-structure"></a>
+</h2>
+<p>A folder named <code>projects</code> exists in <code>hermes</code>
+root directory, including executable R scripts that can be used to
+perform most of the tasks the package was designed to do. Scripts named
+<code>01_*.R</code> are designed to be executed in that order and
+contain necessary code such as <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> calls.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
