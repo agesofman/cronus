@@ -18,7 +18,6 @@ get_roi(region, ...)
 An object of class sf.
 }
 \description{
-\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 This function takes the name of a region and returns a sf object.
 }
 \details{

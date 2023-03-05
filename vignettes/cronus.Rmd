@@ -29,7 +29,7 @@ The database takes the form of a 5-level structured directory. For a specific re
 4. Product, (e.g. cropmaps)
 5. Variable, (e.g. cdl)
 
-```{r setup}
+```{r setup, eval = FALSE}
 library(cronus)
 print_tree()
 ```

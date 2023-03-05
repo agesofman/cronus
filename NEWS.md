@@ -1,3 +1,16 @@
+# cronus 0.1.0
+
+* Variables now have their own S3 classes.
+* Created `Progress` and `ProgressList` classes.
+* Database functions `get_*()` are now exported.
+* Function `tidy_progress()` was renamed to `tidy_Qs_progress()`.
+* A `mutate()` function was added for `Progress`, `ProgressList`.
+* Function `calc_percentage()` is now divided in `cal_perc()` and `calc_cumperc()`.
+* Removed lifecycle badge from roi.
+* Method `Database` for function `read()` was replaced by the `Progress` method.
+* Function `combine()` was moved from `agesofman` to `cronus`.
+* Function `get_combinations()` was moved from `persephone` to `cronus` and renamed to `combinations()`.
+
 # cronus 0.0.10
 
 * Deleted CRAN files.

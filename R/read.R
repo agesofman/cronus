@@ -11,7 +11,7 @@
 #' @param x S4 object. A product of interest.
 #' @param variable character. The variable of interest.
 #' @param name character. The name of the metadata files.
-#' @param df_var data.frame. A data frame with columns Product and Variable.
+#' @param predictors data.frame. A data frame with columns Product and Variable.
 #' @param ... extra arguments.
 #'
 #' @return The data of interest (list, data.frame, raster, or other).
@@ -49,7 +49,7 @@ setGeneric("read", signature = c("x"),
 #' @rdname read
 setMethod("read",
           signature  = c(x = "Quickstats"),
-          definition = function(x, variable) {
+          definition = function(x, variable, predictors = NULL) {
 
   # Get slots
   region <- x@region
@@ -62,7 +62,19 @@ setMethod("read",
 
   # Load the data
   load(path_var)
-  data
+  var_class <- class(data)[1]
+
+  # Concatenate the predictors
+  if (!is.null(predictors)) {
+    for (i in 1:dim(predictors)[1]) {
+      x <- new(predictors$Product[i], region = region, dir = dir)
+      data2 <- read(x, predictors$Variable[i])[names(data)]
+      data <- mapply(dplyr::left_join, data, data2, by = "Date", SIMPLIFY = FALSE)
+    }
+  }
+
+  # Return the data
+  do.call(var_class, list(data))
 
 })
 
@@ -164,30 +176,5 @@ setMethod("read",
   # Load the data
   load(path_var)
   data
-
-})
-
-#' @rdname read
-setMethod("read",
-          signature  = c(x = "Database"),
-          definition = function(x, df_var) {
-
-  # Get slots
-  region <- x@region
-  date <- x@date
-  dir <- x@dir
-  list_data <- list()
-
-  x <- new(df_var$Product[1], region = region, date = date, dir = dir)
-  list_data <- read(x, df_var$Variable[1])
-
-  for (i in 2:dim(df_var)[1]) {
-    x <- new(df_var$Product[i], region = region, date = date, dir = dir)
-    list2 <- read(x, df_var$Variable[i])[names(list_data)]
-    list_data <- mapply(dplyr::left_join, list_data, list2, by = "Date", SIMPLIFY = FALSE)
-  }
-
-  # Return the data
-  list_data
 
 })

@@ -82,7 +82,12 @@ x <- new("Quickstats", region = region, date = date)
 
 # Download the data
 data <- download(x, "progress", ringname)
+class(data)
+class(data[["Corn"]])
 head(data$Corn)
+
+# Plot the data
+plot(data, crops = "Winter Wheat", year = 2021)
 
 ## Cropmaps CDL
 

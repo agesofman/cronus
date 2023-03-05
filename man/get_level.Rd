@@ -5,10 +5,12 @@
 \alias{is_sector}
 \alias{is_provider}
 \alias{is_product}
-\alias{get_class}
+\alias{is_variable}
+\alias{get_demeter_class}
 \alias{get_sector}
 \alias{get_provider}
 \alias{get_product}
+\alias{get_variable}
 \title{Manage database}
 \usage{
 get_level(name)
@@ -19,13 +21,17 @@ is_provider(name)
 
 is_product(name)
 
-get_class(x)
+is_variable(name)
+
+get_demeter_class(x)
 
 get_sector(x)
 
 get_provider(x)
 
 get_product(x)
+
+get_variable(x)
 }
 \arguments{
 \item{name}{character. A class name of interest.}

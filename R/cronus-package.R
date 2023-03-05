@@ -12,6 +12,7 @@
 #' @importFrom stats weighted.mean
 #' @importFrom tigris counties
 #' @importFrom tigris states
+#' @importFrom utils combn
 #' @importFrom utils data
 #' @importFrom utils read.csv
 #' @importFrom utils read.table

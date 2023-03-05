@@ -1,25 +1,24 @@
 #-------------------------------------------------------------------------------
-# Handle Quickstats progress data
+# Tidy raw data
 # Created by: Ioannis Oikonomidis
 #-------------------------------------------------------------------------------
 
-#' @title Handle Quickstats progress data
+#' @title Tidy Quickstats progress
 #'
 #' @description
 #' Tidy the Quickstats progress data.
 #'
-#' @param data data.frame or list. The quickstats progress variable.
-#' @param cum logical. Calculate the cumulative percentage? If FALSE,
-#' calculate the simple percentage.
+#' @param data data.frame. The quickstats progress variable.
 #'
 #' @import dplyr
 #' @import tidyr
+#' @export
 #'
-#' @return data.frame or list.
+#' @return A `ProgressList`.
 #'
 #' @details
 #' This function relies on the `tidyverse` package to tidy the data.
-tidy_progress <- function(data) {
+tidy_Qs_progress <- function(data) {
 
   # Bind global variables
   year <- week_ending <- commodity_desc <- short_desc <- Value <- first_week <- NULL
@@ -95,60 +94,98 @@ tidy_progress <- function(data) {
   # Split by crop
   data <- split(data, f = data$Crop)
 
-  # Handle stages (factorize, ignore missing for whole seasons)
-  data <- lapply(data, calc_stages)
+  for (i in seq_along(data)) {
 
-  # Create Percentage from CumPercentage
-  data <- lapply(data, calc_percentage, cum = FALSE)
-
-  # Result
-  data
-
-}
-
-#' @rdname tidy_progress
-#' @export
-calc_stages <- function(data) {
-
-  # Bind global variables
-  Date <- Stage <- CumPercentage <- Percentage <- Time <- NULL
-
-  data_stages <- data %>%
-    dplyr::group_by(Stage) %>%
-    dplyr::summarise(start = weighted.mean(CumPercentage, Time),
-                     .groups = "keep") %>%
-    dplyr::arrange(desc(start)) %>%
-    dplyr::filter(!is.na(start)) %>%
-    dplyr::ungroup()
-
-  data$Stage <- factor(data$Stage, levels = data_stages$Stage, ordered = TRUE)
-  dplyr::filter(data, !is.na(Stage))
-
-}
-
-#' @rdname tidy_progress
-#' @export
-calc_percentage <- function(data, cum = TRUE) {
-
-  # Bind global variables
-  Date <- Stage <- CumPercentage <- Percentage <- Season <- Time <- NULL
-
-  if (cum) {
-    data %>%
-      dplyr::arrange(Season, Time, desc(Stage)) %>%
-      dplyr::group_by(Season, Time) %>%
-      dplyr::mutate(CumPercentage = trunc_minmax(cumsum(Percentage), 0, 1)) %>%
-      dplyr::mutate(Percentage = CumPercentage - lag(CumPercentage, default = 0)) %>%
-      dplyr::arrange(Season, Time, Stage) %>%
+    # Handle stages (factorize, ignore missing for whole seasons)
+    data_stages <- data[[i]] %>%
+      dplyr::group_by(Stage) %>%
+      dplyr::summarise(start = weighted.mean(CumPercentage, Time), .groups = "keep") %>%
+      dplyr::arrange(desc(start)) %>%
+      dplyr::filter(!is.na(start)) %>%
       dplyr::ungroup()
-  } else {
-    data %>%
+
+    data[[i]] <- data[[i]] %>%
+      dplyr::mutate(Stage = factor(Stage, levels = data_stages$Stage, ordered = TRUE)) %>%
+      dplyr::filter(!is.na(Stage)) %>%
+      # Create Percentage from CumPercentage
       dplyr::arrange(Season, Time, desc(Stage)) %>%
       dplyr::group_by(Season, Time) %>%
       dplyr::mutate(CumPercentage = trunc_minmax(CumPercentage, 0, 1)) %>%
       dplyr::mutate(Percentage = CumPercentage - lag(CumPercentage, default = 0)) %>%
       dplyr::arrange(Season, Time, Stage) %>%
       dplyr::ungroup()
+
   }
+
+  # Result
+  ProgressList(data)
+
+}
+
+#' @rdname tidy_Qs_progress
+#' @export
+calc_cumperc <- function(data) {
+  UseMethod("calc_cumperc")
+}
+
+#' @rdname tidy_Qs_progress
+#' @export
+calc_cumperc.Progress <- function(data) {
+
+  # Bind global variables
+  Date <- Stage <- CumPercentage <- Percentage <- Season <- Time <- NULL
+
+  data <- data %>%
+    dplyr::arrange(Season, Time, desc(Stage)) %>%
+    dplyr::group_by(Season, Time) %>%
+    dplyr::mutate(CumPercentage = trunc_minmax(cumsum(Percentage), 0, 1)) %>%
+    dplyr::mutate(Percentage = CumPercentage - lag(CumPercentage, default = 0)) %>%
+    dplyr::arrange(Season, Time, Stage) %>%
+    dplyr::ungroup()
+
+  Progress(data)
+
+}
+
+#' @rdname tidy_Qs_progress
+#' @export
+calc_cumperc.ProgressList <- function(data) {
+
+  data <- lapply(data, calc_cumperc)
+  ProgressList(data)
+
+}
+
+#' @rdname tidy_Qs_progress
+#' @export
+calc_perc <- function(data) {
+  UseMethod("calc_perc")
+}
+
+#' @rdname tidy_Qs_progress
+#' @export
+calc_perc.Progress <- function(data) {
+
+  # Bind global variables
+  Date <- Stage <- CumPercentage <- Percentage <- Season <- Time <- NULL
+
+  data <- data %>%
+    dplyr::arrange(Season, Time, desc(Stage)) %>%
+    dplyr::group_by(Season, Time) %>%
+    dplyr::mutate(CumPercentage = trunc_minmax(CumPercentage, 0, 1)) %>%
+    dplyr::mutate(Percentage = CumPercentage - lag(CumPercentage, default = 0)) %>%
+    dplyr::arrange(Season, Time, Stage) %>%
+    dplyr::ungroup()
+
+  Progress(data)
+
+}
+
+#' @rdname tidy_Qs_progress
+#' @export
+calc_perc.ProgressList <- function(data) {
+
+  data <- lapply(data, calc_perc)
+  ProgressList(data)
 
 }

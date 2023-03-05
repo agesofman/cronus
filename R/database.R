@@ -11,6 +11,7 @@
 #' @param provider character. A provider of interest.
 #'
 #' @return character. The name of the corresponding service.
+#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -59,28 +60,43 @@ get_level <- function(name) {
 }
 
 #' @rdname get_level
+#' @export
 is_sector <- function(name) {
-  get_level(name) == "Sector"
+  lvl <- get_level(name)
+  length(lvl) == 1 && lvl == "Sector"
 }
 
 #' @rdname get_level
+#' @export
 is_provider <- function(name) {
-  get_level(name) == "Provider"
+  lvl <- get_level(name)
+  length(lvl) == 1 && lvl == "Provider"
 }
 
 #' @rdname get_level
+#' @export
 is_product <- function(name) {
-  get_level(name) == "Product"
+  lvl <- get_level(name)
+  length(lvl) == 1 && lvl == "Product"
 }
 
 #' @rdname get_level
-get_class <- function(x) {
+#' @export
+is_variable <- function(name) {
+  lvl <- get_level(name)
+  length(lvl) == 1 && lvl == "Variable"
+}
+
+#' @rdname get_level
+#' @export
+get_demeter_class <- function(x) {
   as.character(class(x))
 }
 
 #' @rdname get_level
+#' @export
 get_sector <- function(x) {
-  name <- tolower(get_class(x))
+  name <- tolower(get_demeter_class(x))
   if (is_product(name)) {
     get_branch(product = name)$sector
   } else if (is_provider(name)) {
@@ -93,8 +109,9 @@ get_sector <- function(x) {
 }
 
 #' @rdname get_level
+#' @export
 get_provider <- function(x) {
-  name <- tolower(get_class(x))
+  name <- tolower(get_demeter_class(x))
   if (is_product(name)) {
     get_branch(product = name)$provider
   } else if (is_provider(name)) {
@@ -107,10 +124,28 @@ get_provider <- function(x) {
 }
 
 #' @rdname get_level
+#' @export
 get_product <- function(x) {
-  name <- tolower(get_class(x))
+  name <- tolower(get_demeter_class(x))
   if (is_product(name)) {
     get_branch(product = name)$product
+  } else if (is_provider(name)) {
+    stop(name, " is a Provider, a superclass of Product. It does not have a single Product.")
+  } else if (is_sector(name)) {
+    stop(name, " is a Sector, a superclass of Product. It does not have a single Product.")
+  } else {
+    stop(name, " is not a Product, Provider, nor Sector. Did you misspell ", name, "?")
+  }
+}
+
+#' @rdname get_level
+#' @export
+get_variable <- function(x) {
+  name <- tolower(get_demeter_class(x)[1])
+  if (is_variable(name)) {
+    name
+  } else if (is_product(name)) {
+    stop(name, " is a Product, a superclass of Variable. It does not have a single Variable.")
   } else if (is_provider(name)) {
     stop(name, " is a Provider, a superclass of Product. It does not have a single Product.")
   } else if (is_sector(name)) {

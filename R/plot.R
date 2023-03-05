@@ -3,15 +3,15 @@
 # Created by: Ioannis Oikonomidis
 #-------------------------------------------------------------------------------
 
-#' @title Plot
+setGeneric("plot")
+
+#' @title Plot Progress
 #'
 #' @description
-#' Create a plot of the data stored in the database.
+#' Create a plot of the crop progress data.
 #'
-#' @param x an S4 object. A product of interest.
-#' @param y character. A variable of interest.
-#' @param year numeric. Year(s) of interest.
-#' @param date character Date(s) of interest.
+#' @param x an object of class `Progress`.
+#' @param season numeric. Year(s) of interest.
 #' @param crops character. The crops of interest.
 #' @param ncol numeric. Number of rows in the plot layout.
 #' @param nrow numeric. Number of columns in the plot layout.
@@ -22,16 +22,13 @@
 #' @param file character. The file name.
 #' @param width numeric. The width of the plot in inches.
 #' @param height numeric. The height of the plot in inches.
-#' @param ... extra arguments.
 #'
-#' @return A plot, created either with `ggplot2` or with `terra`.
+#' @return A plot, created with `ggplot2`.
 #'
 #' @export
 #' @importFrom ggplot2 ggplot geom_line aes labs theme_minimal
 #' @importFrom dplyr filter
-#' @importFrom terra rast cats set.cats plot
 #' @importFrom ggpubr ggarrange
-#' @importFrom stringr str_to_title
 #'
 #' @examples
 #' \dontrun{
@@ -40,7 +37,88 @@
 #'                  div = c(country = "United States", state = "Nebraska"))
 #' date <- date_seq("2002-01-01", "2002-12-31")
 #'
-#' ## Quickstats Progress
+#' # Create the object
+#' x <- new("Quickstats", region = region, date = date)
+#'
+#' # Download the data
+#' data <- download(x, "progress", ringname)
+#' class(data)
+#' class(data[["Corn"]])
+#' head(data$Corn)
+#'
+#' # Plot the data
+#' plot(data, crops = "Winter Wheat", year = 2021)
+#' }
+setMethod("plot",
+          signature  = c(x = "Progress"),
+          definition = function(x,
+                                season = NULL,
+                                crops = NULL,
+                                ncol = NULL,
+                                nrow = NULL,
+                                ylab = "Percentage",
+                                xlab = "Time",
+                                save = FALSE,
+                                dir = getwd(),
+                                file = "plot.pdf",
+                                width = 15,
+                                height = 8) {
+
+  # Save the plot
+  if (save) {
+    filepath <- file.path(dir, file)
+    pdf(filepath, width = width, height = height)
+  }
+
+  # Get the cropsW
+  if (is.null(crops)) {
+    crops <- names(data)
+  }
+
+  # Create the plots
+  plots <- list()
+  for (crop in crops) {
+    data[[crop]] <- dplyr::filter(data[[crop]], .data$Season %in% season)
+    plots[[crop]] <- ggplot2::ggplot() +
+                     ggplot2::geom_line(data = data[[crop]],
+                                        ggplot2::aes(x = .data$Date,
+                                                     y = .data$CumPercentage,
+                                                     col = .data$Stage)) +
+                     ggplot2::labs(title = paste0(crop, " Progress"),
+                                   y = ylab,
+                                   x = xlab) +
+                     ggplot2::theme_minimal()
+  }
+  print(do.call(ggpubr::ggarrange, c(plots, ncol = ncol, nrow = nrow)))
+
+  # Close the device
+  if (save) dev.off()
+
+})
+
+#' @title Plot Rasters
+#'
+#' @description
+#' Create a plot of the data stored in the database.
+#'
+#' @param x an S4 object. A product of interest.
+#' @param y character. A variable of interest.
+#' @param year numeric. Year(s) of interest.
+#' @param date character Date(s) of interest.
+#' @param crops character. The crops of interest.
+#'
+#' @return A plot, created with `terra`.
+#'
+#' @export
+#' @importFrom terra rast cats set.cats plot
+#' @importFrom stringr str_to_title
+#'
+#' @examples
+#' \dontrun{
+#' # Define required variables
+#' region <- Region(name = "nebraska", type = "us state",
+#'                  div = c(country = "United States", state = "Nebraska"))
+#' date <- date_seq("2002-01-01", "2002-12-31")
 #'
 #' # Create the object
 #' x <- new("Cropmaps", region = region, date = date)
@@ -57,68 +135,6 @@
 #' # Plot
 #' plot(x, "tmin", "2002-01-01")
 #' }
-setGeneric("plot")
-
-#' @rdname plot
-setMethod("plot",
-          signature  = c(x = "Quickstats", y = "character"),
-          definition = function(x, y,
-                               year,
-                               crops = NULL,
-                               ncol = NULL,
-                               nrow = NULL,
-                               ylab = "Percentage",
-                               xlab = "Time",
-                               save = FALSE,
-                               dir = getwd(),
-                               file = "plot.pdf",
-                               width = 15,
-                               height = 8) {
-
-  # Save the plot
-  if (save) pdf(file.path(dir, file), width = width, height = height)
-
-  # Get slots
-  region <- x@region
-  date <- x@date
-  dir <- x@dir
-  product <- get_product(x)
-  variable <- y
-  data <- read(x, variable)
-
-  # Get rtoi
-  if (is.null(year)) {
-    toi <- get_toi(date)
-    year <- toi$uyear
-  }
-
-  # Get the crops
-  if (is.null(crops)) {
-    crops <- names(data)
-  }
-
-  # Create the plots
-  plots <- list()
-  for (crop in crops) {
-    data[[crop]] <- dplyr::filter(data[[crop]], .data$Season %in% year)
-    plots[[crop]] <- ggplot2::ggplot() +
-                     ggplot2::geom_line(data = data[[crop]],
-                                        ggplot2::aes(x = .data$Date,
-                                                     y = .data$CumPercentage,
-                                                     col = .data$Stage)) +
-                     ggplot2::labs(title = paste0(crop, " ", variable),
-                                   y = ylab,
-                                   x = xlab) +
-                     ggplot2::theme_minimal()
-  }
-  print(do.call(ggpubr::ggarrange, c(plots, ncol = ncol, nrow = nrow)))
-
-  # Close the device
-  if (save) dev.off()
-
-})
-
-#' @rdname plot
 setMethod("plot",
           signature  = c(x = "Cropmaps", y = "character"),
           definition = function(x, y, crops = NULL, year = NULL) {
@@ -153,7 +169,7 @@ setMethod("plot",
 
 })
 
-#' @rdname plot
+#' @rdname plot-Cropmaps-character-method
 setMethod("plot",
           signature  = c(x = "Daymet", y = "character"),
           definition = function(x, y, date = NULL) {

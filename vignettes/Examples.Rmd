@@ -41,7 +41,7 @@ head(data$Corn)
 progress_2020 <- read(x, variable)
 
 # Plot the data
-plot(x, variable, year = 2020, crops = c("Corn", "Oats"))
+plot(progress_2020, year = 2020, crops = c("Corn", "Oats"))
 ```
 
 ## Cropmaps CDL

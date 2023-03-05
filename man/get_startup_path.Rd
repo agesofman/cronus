@@ -85,5 +85,6 @@ edit_r_environ(scope = "user")
 }
 }
 \seealso{
-\link[base:Startup]{base::Startup}, \code{\link[base:options]{base::options()}}, \code{\link[=set_path_demeter]{set_path_demeter()}}
+\link[base:Startup]{base::Startup}, \code{\link[base:options]{base::options()}}, \code{\link[=set_path_demeter]{set_path_demeter()}},
+\code{\link[=set_path_hermes]{set_path_hermes()}}
 }

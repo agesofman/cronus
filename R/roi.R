@@ -5,7 +5,7 @@
 
 #' @title Get a region of interest (roi)
 #'
-#' @description `r lifecycle::badge("stable")`
+#' @description
 #' This function takes the name of a region and returns a sf object.
 #'
 #' @param region character. The region of interest. See details

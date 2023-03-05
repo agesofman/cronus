@@ -28,7 +28,8 @@
 #'
 #' @export
 #'
-#' @seealso [base::Startup], [base::options()], [cronus::set_path_demeter()]
+#' @seealso [base::Startup], [base::options()], [set_path_demeter()],
+#' [set_path_hermes()]
 #'
 #' @examples
 #' \dontrun{
@@ -144,7 +145,7 @@ add_startup_line <- function(newline, oldline = newline, type = "environ") {
 #' @return nothing. The .Renviron file is edited.
 #' @export
 #'
-#' @seealso [cronus::get_startup_path()]
+#' @seealso [get_startup_path()]
 #'
 #' @examples
 #' \dontrun{
@@ -166,4 +167,39 @@ get_path_demeter <- function() {
     source(path_renviron, local = TRUE)
   }
   path_demeter
+}
+
+#' @title Set hermes path
+#'
+#' @description Set or get the default `path_hermes` by editing the .Renviron
+#' file.
+#'
+#' @param path character. The path to the database directory.
+#'
+#' @return nothing. The .Renviron file is edited.
+#'
+#' @export
+#'
+#' @seealso [get_startup_path()]
+#'
+#' @examples
+#' \dontrun{
+#' set_path_hermes(getwd())
+#' get_path_hermes()
+#' }
+set_path_hermes <- function(path) {
+  newline <- paste0("path_hermes='", path, "'")
+  oldline <- "path_hermes="
+  add_startup_line(newline, oldline = oldline, type = "environ")
+}
+
+#' @rdname set_path_hermes
+#' @export
+get_path_hermes <- function() {
+  path_renviron <- get_startup_path(type = "environ")
+  path_hermes <- NULL
+  if (file.exists(path_renviron)) {
+    source(path_renviron, local = TRUE)
+  }
+  path_hermes
 }

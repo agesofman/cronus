@@ -1,0 +1,43 @@
+---
+title: "hermes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{hermes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, eval = FALSE}
+library(cronus)
+```
+
+*hermes* is an R project that stores files. It includes the necessary executable scripts that the *Ages of Man* core team members use in their research, as well as the results (reports, plots etc) generated.
+
+## Download
+
+The project can be downloaded from the [hermes github repository](https://github.com/agesofman/agesofman "hermes github repository"), or with the `download_hermes()` function included in the `agesofman` package.
+
+```{r eval = FALSE}
+path_hermes <- getwd()
+download_hermes(path_hermes)
+```
+
+## Project path
+
+In order to avoid specifying the project path in every single function call, a variable named `path_hermes` can be added to the environment variables, stored in the user .Renviron file. This allows the user to specify only once the project path, which will load in the beginning of every R session. Function `set_path_hermes()` can be used to specify or change the path.
+
+```{r eval = FALSE}
+set_path_hermes(path = path_hermes)
+get_path_hermes()
+```
+
+## Project structure
+
+A folder named `projects` exists in `hermes` root directory, including executable R scripts that can be used to perform most of the tasks the package was designed to do. Scripts named `01_*.R` are designed to be executed in that order and contain necessary code such as `library()` calls.

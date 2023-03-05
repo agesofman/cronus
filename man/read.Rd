@@ -7,12 +7,11 @@
 \alias{read,Parameters-method}
 \alias{read,Daymet-method}
 \alias{read,Mod09ga-method}
-\alias{read,Database-method}
 \title{Read data}
 \usage{
 read(x, ...)
 
-\S4method{read}{Quickstats}(x, variable)
+\S4method{read}{Quickstats}(x, variable, predictors = NULL)
 
 \S4method{read}{Cropmaps}(x, name)
 
@@ -21,8 +20,6 @@ read(x, ...)
 \S4method{read}{Daymet}(x, variable)
 
 \S4method{read}{Mod09ga}(x, variable)
-
-\S4method{read}{Database}(x, df_var)
 }
 \arguments{
 \item{x}{S4 object. A product of interest.}
@@ -31,9 +28,9 @@ read(x, ...)
 
 \item{variable}{character. The variable of interest.}
 
-\item{name}{character. The name of the metadata files.}
+\item{predictors}{data.frame. A data frame with columns Product and Variable.}
 
-\item{df_var}{data.frame. A data frame with columns Product and Variable.}
+\item{name}{character. The name of the metadata files.}
 }
 \value{
 The data of interest (list, data.frame, raster, or other).

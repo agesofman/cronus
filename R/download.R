@@ -69,7 +69,12 @@
 #'
 #' # Download the data
 #' data <- download(x, "progress", ringname)
+#' class(data)
+#' class(data[["Corn"]])
 #' head(data$Corn)
+#'
+#' # Plot the data
+#' plot(data, crops = "Winter Wheat", year = 2021)
 #'
 #' ## Cropmaps CDL
 #'
@@ -135,7 +140,7 @@ setMethod("download",
   data <- rnassqs::nassqs(params)
 
   # Tidy the data
-  data <- do.call(paste0("tidy_", tolower(variable)), list(data = data))
+  data <- do.call(paste0("tidy_Qs_", tolower(variable)), list(data = data))
 
   # Save the data
   save(data, file = path_var)

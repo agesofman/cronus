@@ -37,17 +37,20 @@ Region <- setClass("Region",
 #'
 #' @description
 #' cronus creates a database, which takes the form of a 5-level directory. These
-#' levels are Region > Sector > Provider > Product > Variable. For a specific
-#' region, data can belong to one of three sectors: agricultural, environmental
-#' or satellite. Data are made available by a provider, usually an organization
-#' or a lab, which organizes the data in one or more products. Each product
-#' contains several variables of interest.
+#' levels are Region > Sector > Provider > Product > Variable.
+#'
+#' @details
+#' For a specific region, data can belong to one of three sectors: agricultural,
+#' environmental or satellite. Data are made available by a provider, usually an
+#' organization or a lab, which organizes the data in one or more products.
+#' Each product contains several variables of interest.
 #'
 #' The class tree structure is the following:
 #'
 #' - \code{Agricultural} Sector
 #'    - \code{Nass} Provider
 #'      - \code{Quickstats} Product
+#'        - \code{Progress} Variable
 #'      - \code{Cropmaps} Product
 #'    - \code{Bibliography} Provider
 #'      - \code{Parameters} Product
@@ -69,6 +72,10 @@ Region <- setClass("Region",
 #' Classes \code{Database}, \code{Sector}, \code{Provider}, and \code{Product}
 #' are also defined, but are abstract classes that exist solely for hierarchical
 #' purposes.
+#'
+#' All classes are defined with the S4 OOP system, except from the Variables
+#' that are defined using the S3 OOP system. Each variable has its own
+#' documentation page.
 #'
 #' @slot region Region. A region of interest.
 #' @slot date Date. Dates of interest (vector).
@@ -108,6 +115,9 @@ Provider <- setClass("Provider", contains = "Sector")
 
 #' @rdname Database-class
 Product <- setClass("Product", contains = "Provider")
+
+#' @rdname Database-class
+Variable <- setClass("Variable", contains = "Product")
 
 # Sectors ----
 
