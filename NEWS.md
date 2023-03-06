@@ -1,3 +1,7 @@
+# cronus 0.1.2
+
+* Function `mutate()` was renamed into `modify()`.
+
 # cronus 0.1.1
 
 * Fixed bug in `new_Progress()`.

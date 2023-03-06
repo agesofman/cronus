@@ -1,11 +1,11 @@
 #-------------------------------------------------------------------------------
-# Mutate data
+# Modify data
 # Created by: Ioannis Oikonomidis
 #-------------------------------------------------------------------------------
 
-#' @title Mutate data
+#' @title modify data
 #'
-#' @param data data.frame. The data to mutate.
+#' @param data data.frame. The data to modify.
 #' @param vars character. The name of the variables (columns) of `data`.
 #' @param fun function. The name of a function to apply on `data`.
 #' @param ... extra arguments.
@@ -14,11 +14,11 @@
 #'
 #' @importFrom dplyr group_by mutate across ungroup
 #' @export
-setGeneric("mutate", signature = c("data"),
-           function(data, ...) { standardGeneric("mutate") })
+setGeneric("modify", signature = c("data"),
+           function(data, ...) { standardGeneric("modify") })
 
-#' @rdname mutate
-setMethod("mutate",
+#' @rdname modify
+setMethod("modify",
           signature  = c(data = "Progress"),
           definition = function(data, vars, fun = cumsum) {
 
@@ -35,13 +35,13 @@ setMethod("mutate",
 
 })
 
-#' @rdname mutate
+#' @rdname modify
 #' @export
-setMethod("mutate",
+setMethod("modify",
           signature  = c(data = "ProgressList"),
           definition = function(data, vars, fun = cumsum) {
 
-  data <- lapply(data, mutate, vars = vars, fun = fun)
+  data <- lapply(data, modify, vars = vars, fun = fun)
 
   # Return the result
   ProgressList(data)
