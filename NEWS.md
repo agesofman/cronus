@@ -1,3 +1,7 @@
+# cronus 0.1.1
+
+* Fixed bug in `new_Progress()`.
+
 # cronus 0.1.0
 
 * Variables now have their own S3 classes.

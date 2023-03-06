@@ -60,7 +60,8 @@ new_Progress <- function(x = NULL) {
                     Stage = factor(),
                     Season = numeric(),
                     Time = numeric(),
-                    Date = lubridate::dmy())
+                    Date = lubridate::dmy(),
+                    CumPercentage = numeric())
   }
   stopifnot(is.data.frame(x))
   structure(x, class = c("Progress", "data.frame"))
@@ -88,9 +89,6 @@ validate_Progress <- function(x) {
     }
     if (!inherits(x$Date, 'Date')) {
       stop("Column Date must be Date, instead got ", class(x$Date))
-    }
-    if (!is.numeric(x$Percentage)) {
-      stop("Column Percentage must be numeric, instead got ", class(x$Percentage))
     }
     if (!is.numeric(x$CumPercentage)) {
       stop("Column CumPercentage must be numeric, instead got ", class(x$CumPercentage))
