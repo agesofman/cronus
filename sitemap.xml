@@ -94,6 +94,9 @@
     <loc>https://agesofman.github.io/cronus/reference/get_level.html</loc>
   </url>
   <url>
+    <loc>https://agesofman.github.io/cronus/reference/get_path_hermes_obj.html</loc>
+  </url>
+  <url>
     <loc>https://agesofman.github.io/cronus/reference/get_roi.html</loc>
   </url>
   <url>
@@ -137,9 +140,6 @@
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/read.html</loc>
-  </url>
-  <url>
-    <loc>https://agesofman.github.io/cronus/reference/read_exe.html</loc>
   </url>
   <url>
     <loc>https://agesofman.github.io/cronus/reference/recode.html</loc>

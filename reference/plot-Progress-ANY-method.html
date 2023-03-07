@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">cronus</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,6 +65,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S4 method for Progress,ANY</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
+<span>  region <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  season <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  crops <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ncol <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -72,7 +73,7 @@
 <span>  ylab <span class="op">=</span> <span class="st">"Percentage"</span>,</span>
 <span>  xlab <span class="op">=</span> <span class="st">"Time"</span>,</span>
 <span>  save <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  path <span class="op">=</span> <span class="fu"><a href="set_path_hermes.html">get_path_hermes</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  file <span class="op">=</span> <span class="st">"plot.pdf"</span>,</span>
 <span>  width <span class="op">=</span> <span class="fl">15</span>,</span>
 <span>  height <span class="op">=</span> <span class="fl">8</span></span>
@@ -113,10 +114,6 @@
 <dd><p>logical. Should the plot be saved?</p></dd>
 
 
-<dt>dir</dt>
-<dd><p>character. The directory in which the plot will be saved.</p></dd>
-
-
 <dt>file</dt>
 <dd><p>character. The file name.</p></dd>
 
@@ -127,6 +124,10 @@
 
 <dt>height</dt>
 <dd><p>numeric. The height of the plot in inches.</p></dd>
+
+
+<dt>dir</dt>
+<dd><p>character. The directory in which the plot will be saved.</p></dd>
 
 </dl></div>
     <div class="section level2">
