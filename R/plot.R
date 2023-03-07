@@ -52,6 +52,7 @@ setGeneric("plot")
 setMethod("plot",
           signature  = c(x = "Progress"),
           definition = function(x,
+                                region = NULL,
                                 season = NULL,
                                 crops = NULL,
                                 ncol = NULL,
@@ -59,15 +60,16 @@ setMethod("plot",
                                 ylab = "Percentage",
                                 xlab = "Time",
                                 save = FALSE,
-                                dir = getwd(),
+                                path = get_path_hermes(),
                                 file = "plot.pdf",
                                 width = 15,
                                 height = 8) {
 
   # Save the plot
   if (save) {
-    filepath <- file.path(dir, file)
-    pdf(filepath, width = width, height = height)
+    dir_output <- file.path(path, "cronus", region@name, "plot", class(x)[1])
+    dir.create(dir_output, showWarnings = FALSE, recursive = TRUE)
+    pdf(dir_output, width = width, height = height)
   }
 
   # Get the cropsW

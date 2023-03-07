@@ -16,3 +16,17 @@ test_that("hermes download works", {
   unlink(path_hermes_zip, recursive = TRUE, force = TRUE)
 
 })
+
+test_that("hermes download works", {
+
+  path_hermes <- tempdir()
+
+  # Test path
+  expect_no_error(get_path_hermes_obj("objectname", "projectname", path_hermes))
+
+  # Save and load object
+  x <- 1:3
+  expect_no_error(save_obj(x, "objectname", "projectname", path_hermes))
+  expect_no_error(read_obj("objectname", "projectname", path_hermes))
+
+})

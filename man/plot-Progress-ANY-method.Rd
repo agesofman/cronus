@@ -6,6 +6,7 @@
 \usage{
 \S4method{plot}{Progress,ANY}(
   x,
+  region = NULL,
   season = NULL,
   crops = NULL,
   ncol = NULL,
@@ -13,7 +14,7 @@
   ylab = "Percentage",
   xlab = "Time",
   save = FALSE,
-  dir = getwd(),
+  path = get_path_hermes(),
   file = "plot.pdf",
   width = 15,
   height = 8
@@ -36,13 +37,13 @@
 
 \item{save}{logical. Should the plot be saved?}
 
-\item{dir}{character. The directory in which the plot will be saved.}
-
 \item{file}{character. The file name.}
 
 \item{width}{numeric. The width of the plot in inches.}
 
 \item{height}{numeric. The height of the plot in inches.}
+
+\item{dir}{character. The directory in which the plot will be saved.}
 }
 \value{
 A plot, created with \code{ggplot2}.

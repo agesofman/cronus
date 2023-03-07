@@ -34,33 +34,42 @@ download_hermes <- function(dir = getwd()) {
   usethis::use_course(url = url, destdir = dir)
 }
 
-#' @title Read scripts
+#' @title Save and read objects
 #'
-#' @description This set of functions sources scripts inside the structured
-#' directory of the `hermes` project and returns an appropriate object. These
-#' functions are used in the model creation process.
+#' @description This set of functions saves and reads files inside the `hermes`
+#' structured directory.
 #'
-#' @param name character. The name of the script (without the .R suffix).
+#' @param object ANY. The object to save / load.
+#' @param name character. The name of the script (without the .RData suffix).
 #' @param project character. The project the script concerns.
 #' @param dir character. The hermes project directory.
-#'
-#' @describeIn read_exe source the script.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' # Set path
-#' path_hermes <- getwd()
+#' get_path_hermes_obj("objectname", "projectname")
 #'
-#' # Download project
-#' download_hermes(path_hermes)
-#'
-#' # Read files
-#' read_exe("test", "persephone", dir = path_hermes)
-#' prm <- read_prm("test", "persephone", dir = path_hermes)
+#' x <- 1:3
+#' save_obj(x, "objectname", "projectname")
+#' read_obj("objectname", "projectname")
 #' }
-read_exe <- function(name, project, dir = get_path_hermes()) {
-  path <- file.path(dir, "projects", project, "exe", paste0(name, ".R"))
-  source(path)
+get_path_hermes_obj <- function(name, project, dir = get_path_hermes()) {
+  dir_output <- file.path(dir, project, "obj")
+  dir.create(dir_output, showWarnings = FALSE, recursive = TRUE)
+  file.path(dir_output, paste0(name, ".RData"))
+}
+
+#' @rdname get_path_hermes_obj
+#' @export
+save_obj <- function(object, name, project, dir = get_path_hermes()) {
+  save(object, file = get_path_hermes_obj(name, project, dir))
+}
+
+#' @rdname get_path_hermes_obj
+#' @export
+read_obj <- function(name, project, dir = get_path_hermes()) {
+  object <- NULL
+  load(file = get_path_hermes_obj(name, project, dir))
+  object
 }

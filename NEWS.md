@@ -1,3 +1,7 @@
+# cronus 0.2.0
+
+* Added functions `get_path_hermes_obj()`, `save_obj()` and `read_obj()`.
+
 # cronus 0.1.2
 
 * Function `mutate()` was renamed into `modify()`.
