@@ -1,3 +1,7 @@
+# cronus 0.2.1
+
+* Fixed documentation bugs.
+
 # cronus 0.2.0
 
 * Added functions `get_path_hermes_obj()`, `save_obj()` and `read_obj()`.

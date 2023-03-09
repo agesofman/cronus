@@ -23,6 +23,8 @@
 \arguments{
 \item{x}{an object of class \code{Progress}.}
 
+\item{region}{Region. The region corresponding to the data.}
+
 \item{season}{numeric. Year(s) of interest.}
 
 \item{crops}{character. The crops of interest.}
@@ -37,13 +39,13 @@
 
 \item{save}{logical. Should the plot be saved?}
 
+\item{path}{character. The directory in which the plot will be saved.}
+
 \item{file}{character. The file name.}
 
 \item{width}{numeric. The width of the plot in inches.}
 
 \item{height}{numeric. The height of the plot in inches.}
-
-\item{dir}{character. The directory in which the plot will be saved.}
 }
 \value{
 A plot, created with \code{ggplot2}.

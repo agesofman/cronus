@@ -11,6 +11,7 @@ setGeneric("plot")
 #' Create a plot of the crop progress data.
 #'
 #' @param x an object of class `Progress`.
+#' @param region Region. The region corresponding to the data.
 #' @param season numeric. Year(s) of interest.
 #' @param crops character. The crops of interest.
 #' @param ncol numeric. Number of rows in the plot layout.
@@ -18,7 +19,7 @@ setGeneric("plot")
 #' @param ylab character. The y-axis title.
 #' @param xlab character. The x-axis title.
 #' @param save logical. Should the plot be saved?
-#' @param dir character. The directory in which the plot will be saved.
+#' @param path character. The directory in which the plot will be saved.
 #' @param file character. The file name.
 #' @param width numeric. The width of the plot in inches.
 #' @param height numeric. The height of the plot in inches.
