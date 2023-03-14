@@ -1,3 +1,10 @@
+# cronus 0.2.2
+
+* Renamed new hermes functions.
+* Renamed `project()` into `reproject()`, `recode()` into `refactor()` and
+`summarize()` into `congregate()`.
+* Renamed `combine()` into `listcomb()`.
+
 # cronus 0.2.1
 
 * Fixed documentation bugs.

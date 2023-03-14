@@ -21,15 +21,15 @@ test_that("Cropmaps CDL and Daymet functions work", {
   rast_tmin <- load_map(y, "tmin")
   expect_s4_class(rast_tmin, "SpatRaster")
 
-  # Project the rasters
-  expect_no_error(project(x, y, variablex = "cdl", variabley = "tmin", newvarname = "cdl_projected"))
+  # reproject the rasters
+  expect_no_error(reproject(x, y, variablex = "cdl", variabley = "tmin", newvarname = "cdl_reprojected"))
 
   # Load the data
-  rast_cdl_projected <- load_map(x, "cdl_projected")
+  rast_cdl_reprojected <- load_map(x, "cdl_reprojected")
   expect_s4_class(rast_cdl, "SpatRaster")
 
   # Get the current categories data.frame
-  df_cat <- terra::cats(rast_cdl_projected)[[1]]
+  df_cat <- terra::cats(rast_cdl_reprojected)[[1]]
 
   # Define a transformation table
   tb_rcl <- cbind(a = c(1:4, 121:124, 141:143), b = c(1:4, rep(82, 4), rep(63, 3)))
@@ -41,15 +41,15 @@ test_that("Cropmaps CDL and Daymet functions work", {
   list_md <- read(x, name = "my_metadata")
   expect_type(list_md, "list")
 
-  # Recode the raster
-  expect_no_error(recode(x, variable = "cdl_projected", mdname = "my_metadata", newvarname = "cdl_recoded"))
+  # Refactor the raster
+  expect_no_error(refactor(x, variable = "cdl_reprojected", mdname = "my_metadata", newvarname = "cdl_refactored"))
 
   # Load the data
-  rast_cdl_projected <- load_map(x, "cdl_recoded")
+  rast_cdl_reprojected <- load_map(x, "cdl_refactored")
   expect_s4_class(rast_cdl, "SpatRaster")
 
-  # Summarize the raster
-  df_summary <- summarize(x, "cdl_recoded")
+  # Congregate the raster
+  df_summary <- congregate(x, "cdl_refactored")
   expect_type(df_summary, "list")
 
   # Define the cardinal temperatures metadata
@@ -64,12 +64,12 @@ test_that("Cropmaps CDL and Daymet functions work", {
   tb_ct <- read(z, "default")$tb_ct
 
   # Derive GDD
-  expect_no_error(derive(y, x, "gdd", varxy = c("tmin", "tmax", "cdl_recoded"), tb_ct = tb_ct))
+  expect_no_error(derive(y, x, "gdd", varxy = c("tmin", "tmax", "cdl_refactored"), tb_ct = tb_ct))
   rast_gdd <- load_map(y, "gdd")
   expect_s4_class(rast_gdd, "SpatRaster")
 
   # Compose the rasters into a time-series
-  a <- compose(y, x, variablex = "gdd", variabley = "cdl_recoded", fun = "mean")
+  a <- compose(y, x, variablex = "gdd", variabley = "cdl_refactored", fun = "mean")
   expect_type(a, "list")
 
 })

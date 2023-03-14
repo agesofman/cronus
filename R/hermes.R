@@ -40,36 +40,70 @@ download_hermes <- function(dir = getwd()) {
 #' structured directory.
 #'
 #' @param object ANY. The object to save / load.
-#' @param name character. The name of the script (without the .RData suffix).
-#' @param project character. The project the script concerns.
+#' @param region Region. A region of interest.
+#' @param project character. The project the script concerns (e.g. cronus).
+#' @param type character. The type of the object (e.g. plot, report).
+#' @param class character. The class of the object.
+#' @param name character. The name of the script (without the suffix).
+#' @param suffix character. The name of the suffix (starting with a dot).
 #' @param dir character. The hermes project directory.
 #'
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' get_path_hermes_obj("objectname", "projectname")
+#' # Define required variables
+#' region <- Region(name = "nebraska", type = "us state",
+#'                  div = c(country = "United States", state = "Nebraska"))
 #'
-#' x <- 1:3
-#' save_obj(x, "objectname", "projectname")
-#' read_obj("objectname", "projectname")
+#' create_dir_hermes(region, "cronus", "plot", "Progress", "myplot", ".pdf")
 #' }
-get_path_hermes_obj <- function(name, project, dir = get_path_hermes()) {
-  dir_output <- file.path(dir, project, "obj")
-  dir.create(dir_output, showWarnings = FALSE, recursive = TRUE)
-  file.path(dir_output, paste0(name, ".RData"))
+create_dir_hermes <- function(region = NULL,
+                              project = NULL,
+                              type = NULL,
+                              class = NULL,
+                              name = NULL,
+                              suffix = ".RData",
+                              dir = get_path_hermes())  {
+
+  path <- file.path(dir, region@name, project, type, class)
+  dir.create(path, showWarnings = FALSE, recursive = TRUE)
+
+  if (!is.null(name)) {
+    path <- file.path(path, paste0(name, suffix))
+  }
+
+  invisible(path)
+
 }
 
-#' @rdname get_path_hermes_obj
+#' @rdname create_dir_hermes
 #' @export
-save_obj <- function(object, name, project, dir = get_path_hermes()) {
-  save(object, file = get_path_hermes_obj(name, project, dir))
+save_hermes <- function(object,
+                        region,
+                        project,
+                        type,
+                        class,
+                        name,
+                        suffix = ".RData",
+                        dir = get_path_hermes())  {
+
+  path <- create_dir_hermes(region, project, type, class, name, suffix, dir)
+  save(object, file = path)
+
 }
 
-#' @rdname get_path_hermes_obj
+#' @rdname create_dir_hermes
 #' @export
-read_obj <- function(name, project, dir = get_path_hermes()) {
+read_hermes <- function(region,
+                        project,
+                        type,
+                        class,
+                        name,
+                        suffix = ".RData",
+                        dir = get_path_hermes())  {
   object <- NULL
-  load(file = get_path_hermes_obj(name, project, dir))
+  path <- create_dir_hermes(region, project, type, class, name, suffix, dir)
+  load(file = path)
   object
 }

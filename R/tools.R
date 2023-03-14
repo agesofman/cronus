@@ -14,9 +14,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' combine(x = 1:3, y = letters[1:2])
+#' listcomb(x = 1:3, y = letters[1:2])
 #' }
-combine <- function(...) {
+listcomb <- function(...) {
   as.list(expand.grid(..., stringsAsFactors = FALSE))
 }
 
