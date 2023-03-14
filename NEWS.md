@@ -1,3 +1,7 @@
+# cronus 0.2.3
+
+* Fixed bug in description.
+
 # cronus 0.2.2
 
 * Renamed new hermes functions.
