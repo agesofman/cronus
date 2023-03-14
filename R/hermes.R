@@ -34,12 +34,8 @@ download_hermes <- function(dir = getwd()) {
   usethis::use_course(url = url, destdir = dir)
 }
 
-#' @title Save and read objects
+#' @title Create a subdirectory in hermes
 #'
-#' @description This set of functions saves and reads files inside the `hermes`
-#' structured directory.
-#'
-#' @param object ANY. The object to save / load.
 #' @param region Region. A region of interest.
 #' @param project character. The project the script concerns (e.g. cronus).
 #' @param type character. The type of the object (e.g. plot, report).
@@ -47,6 +43,8 @@ download_hermes <- function(dir = getwd()) {
 #' @param name character. The name of the script (without the suffix).
 #' @param suffix character. The name of the suffix (starting with a dot).
 #' @param dir character. The hermes project directory.
+#'
+#' @return The absolute path is returned invisibly.
 #'
 #' @export
 #'
@@ -77,33 +75,23 @@ create_dir_hermes <- function(region = NULL,
 
 }
 
-#' @rdname create_dir_hermes
+#' @title Save to and read from hermes
+#'
+#' @description
+#' Save an object to the `hermes` database with `save_hermes()` and easily
+#' retrieve it with `read_hermes()`.
+#'
+#' @param object ANY. The object to save / read.
+#' @param ... extra arguments
+#'
+#' @return `save_hermes()` returns the absolute path in which the object is
+#' saved is returned invisibly. `read_hermes()` returns the object of interest.
+#'
 #' @export
-save_hermes <- function(object,
-                        region,
-                        project,
-                        type,
-                        class,
-                        name,
-                        suffix = ".RData",
-                        dir = get_path_hermes())  {
+setGeneric("save_hermes", signature = c("object"),
+           function(object, ...) { standardGeneric("save_hermes") })
 
-  path <- create_dir_hermes(region, project, type, class, name, suffix, dir)
-  save(object, file = path)
-
-}
-
-#' @rdname create_dir_hermes
+#' @rdname save_hermes
 #' @export
-read_hermes <- function(region,
-                        project,
-                        type,
-                        class,
-                        name,
-                        suffix = ".RData",
-                        dir = get_path_hermes())  {
-  object <- NULL
-  path <- create_dir_hermes(region, project, type, class, name, suffix, dir)
-  load(file = path)
-  object
-}
+setGeneric("read_hermes", signature = c("object"),
+           function(object, ...) { standardGeneric("read_hermes") })

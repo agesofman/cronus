@@ -1,3 +1,7 @@
+# cronus 0.3.0
+
+* Added generic functions `save_hermes()` and `read_hermes()`.
+
 # cronus 0.2.3
 
 * Fixed bug in description.

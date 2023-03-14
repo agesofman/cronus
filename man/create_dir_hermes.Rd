@@ -2,9 +2,7 @@
 % Please edit documentation in R/hermes.R
 \name{create_dir_hermes}
 \alias{create_dir_hermes}
-\alias{save_hermes}
-\alias{read_hermes}
-\title{Save and read objects}
+\title{Create a subdirectory in hermes}
 \usage{
 create_dir_hermes(
   region = NULL,
@@ -12,27 +10,6 @@ create_dir_hermes(
   type = NULL,
   class = NULL,
   name = NULL,
-  suffix = ".RData",
-  dir = get_path_hermes()
-)
-
-save_hermes(
-  object,
-  region,
-  project,
-  type,
-  class,
-  name,
-  suffix = ".RData",
-  dir = get_path_hermes()
-)
-
-read_hermes(
-  region,
-  project,
-  type,
-  class,
-  name,
   suffix = ".RData",
   dir = get_path_hermes()
 )
@@ -51,12 +28,12 @@ read_hermes(
 \item{suffix}{character. The name of the suffix (starting with a dot).}
 
 \item{dir}{character. The hermes project directory.}
-
-\item{object}{ANY. The object to save / load.}
+}
+\value{
+The absolute path is returned invisibly.
 }
 \description{
-This set of functions saves and reads files inside the \code{hermes}
-structured directory.
+Create a subdirectory in hermes
 }
 \examples{
 \dontrun{

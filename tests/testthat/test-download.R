@@ -26,7 +26,7 @@ test_that("Cropmaps CDL and Daymet functions work", {
 
   # Load the data
   rast_cdl_reprojected <- load_map(x, "cdl_reprojected")
-  expect_s4_class(rast_cdl, "SpatRaster")
+  expect_s4_class(rast_cdl_reprojected, "SpatRaster")
 
   # Get the current categories data.frame
   df_cat <- terra::cats(rast_cdl_reprojected)[[1]]
@@ -45,8 +45,8 @@ test_that("Cropmaps CDL and Daymet functions work", {
   expect_no_error(refactor(x, variable = "cdl_reprojected", mdname = "my_metadata", newvarname = "cdl_refactored"))
 
   # Load the data
-  rast_cdl_reprojected <- load_map(x, "cdl_refactored")
-  expect_s4_class(rast_cdl, "SpatRaster")
+  rast_cdl_refactored <- load_map(x, "cdl_refactored")
+  expect_s4_class(rast_cdl_refactored, "SpatRaster")
 
   # Congregate the raster
   df_summary <- congregate(x, "cdl_refactored")
